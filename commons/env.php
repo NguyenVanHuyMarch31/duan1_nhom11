@@ -5,6 +5,7 @@
 
 define('BASE_URL'       , 'http://localhost/duan1_nhom11/');
 define('BASE_URL_ADMIN'       , 'http://localhost/duan1_nhom11/admin/');
+define('BASE_URL_STAFF'       , 'http://localhost/duan1_nhom11/staff/');
 
 
 define('DB_HOST'    , 'localhost');
