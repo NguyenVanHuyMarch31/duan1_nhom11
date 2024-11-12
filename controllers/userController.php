@@ -12,6 +12,14 @@ class UserController
     {
         require_once './views/trangchu.php'; 
     }
+    public function formLogin()
+    {
+        require_once './views/login.php'; 
+    }
+    public function formRegister()
+    {
+        require_once './views/register.php'; 
+    }
 
     public function postRegister()
     {

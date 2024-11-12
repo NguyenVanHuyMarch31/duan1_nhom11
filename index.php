@@ -13,6 +13,8 @@ match ($act) {
     'trangchu'  => (new userController())->trangchu(),
     'dangky'     => (new userController())->postRegister(),
     'dangnhap'   => (new userController())->postLogin(),
+    'login'   => (new userController())->formLogin(),
+    'register'   => (new userController())->formRegister(),
     
 
 };

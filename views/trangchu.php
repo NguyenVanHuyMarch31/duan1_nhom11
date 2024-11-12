@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,17 +17,19 @@
             --button-radius: 0.7rem;
             --max-width: 758px;
             --max-height: 420px;
-            font-size: 16px;
-            font-family: "Open Sans", sans-serif;
+            --font-family: "Open Sans", sans-serif;
+            --font-size: 16px;
+            --bg-color: #fff;
+            font-size: var(--font-size);
+            font-family: var(--font-family);
         }
 
         body {
             height: 100vh;
-            width: 100%;
             margin: 0;
             display: grid;
             place-items: center;
-            background: linear-gradient(to bottom, #175d69 23%, #330c43 95%);
+            background: var(--bg-color);
         }
 
         /* Navbar Styles */
@@ -52,7 +55,13 @@
         .navbar .logo a {
             font-size: 1.8rem;
             text-decoration: none;
-            color: #fff;
+            color: pink;
+        }
+
+        .navbar .logo img {
+            width: 100%;
+            max-width: 270px;
+            height: auto;
         }
 
         .navbar .links {
@@ -72,8 +81,9 @@
 
         .navbar .buttons .signup {
             border: 1px solid #fff;
-            padding: 10px 20px;
-            border-radius: 0.375rem;
+            padding: 10px;
+            border-radius: 10%;
+            background-color: linear-gradient(to bottom, #175d69, #330c43);
             transition: 0.2s ease;
             color: #fff;
             text-decoration: none;
@@ -94,7 +104,7 @@
         #hamburger-btn div {
             width: 30px;
             height: 4px;
-            background: #fff;
+            background: linear-gradient(to bottom, #175d69, #330c43);
         }
 
         /* Media Query for Small Screens */
@@ -116,7 +126,7 @@
                 font-size: 1.2rem;
             }
 
-            #menu-toggle:checked + #hamburger-btn + .links {
+            #menu-toggle:checked+#hamburger-btn+.links {
                 display: flex;
             }
 
@@ -129,8 +139,7 @@
         .container {
             background-color: var(--white);
             border-radius: var(--button-radius);
-            box-shadow: 0 0.9rem 1.7rem rgba(0, 0, 0, 0.25),
-                0 0.7rem 0.7rem rgba(0, 0, 0, 0.22);
+            box-shadow: 0 0.9rem 1.7rem rgba(0, 0, 0, 0.25), 0 0.7rem 0.7rem rgba(0, 0, 0, 0.22);
             height: var(--max-height);
             max-width: var(--max-width);
             overflow: hidden;
@@ -214,13 +223,13 @@
 <body>
     <header class="header">
         <nav class="navbar">
-            <div class="logo"><a href="#">BeeFilmHub</a></div>
+            <div class="logo">
+                <a href="?act=trangchu">
+                    <img src="https://scontent.fhan14-1.fna.fbcdn.net/v/t1.15752-9/462568801_601351862462540_8090446170272868322_n.png?_nc_cat=101&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeG3WeBtPV6KnC_8c9sG66zt_btnVtBznh79u2dW0HOeHvmWv3csFmmqauUGviv9bo7QPUc9mlUJGw54c9G1bdh9&_nc_ohc=L-xGH3BEF_IQ7kNvgGRcio7&_nc_zt=23&_nc_ht=scontent.fhan14-1.fna&_nc_gid=AWe5PMv4-06Hq-5DfwJPpNn&oh=03_Q7cD1QFTZGnONi4PVUdgmUhAPSU2y5gzq7RjqxIVBpg8MZ_Xiw&oe=674F1083" alt="BeeFilmHub Logo" />
+
+                </a>
+            </div>
             <input type="checkbox" id="menu-toggle" />
-            <label for="menu-toggle" id="hamburger-btn">
-                <div></div>
-                <div></div>
-                <div></div>
-            </label>
             <ul class="links">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About Us</a></li>
@@ -229,45 +238,16 @@
                 <li><a href="#">Contact Us</a></li>
             </ul>
             <div class="buttons">
-                <a href="#" class="signup">Đăng kí</a>
-                <a href="#" class="signup">Đăng nhập</a>
+                <a href="?act=register" id="signup-button" class="signup">Đăng kí</a>
+                <a href="?act=login" id="signin-button" class="signup">Đăng nhập</a>
             </div>
         </nav>
     </header>
-
-    <div class="container" id="container">
-        <div class="container__form container--signin" style="background-image: url('https://i.pinimg.com/474x/fe/3b/f3/fe3bf37f547ccdbb50617d509482ed2d.jpg');">
-            <form class="form" id="sign-in-form" action="<?= BASE_URL . '?act=dangnhap' ?>" method="post">
-                <h2>Đăng nhập</h2>
-                <input class="input" type="text" placeholder="Tên đăng nhập" name="ten_dang_nhap"  />
-                <input class="input" type="password" placeholder="Password" name="mat_khau"  />
-                <button class="btn">Đăng nhập</button>
-            </form>
-        </div>
-        <div class="container__form container--signup" style="background-image: url('https://i.pinimg.com/474x/fe/3b/f3/fe3bf37f547ccdbb50617d509482ed2d.jpg');">
-            <form class="form" id="sign-up-form" action="<?= BASE_URL . '?act=dangky' ?>" method="post">
-                <h2>Đăng kí</h2>
-                <input class="input" type="text" placeholder="Username" name="ten_dang_nhap"  />
-                <input class="input" type="email" placeholder="Email" name="email"  />
-                <input class="input" type="password" placeholder="Password" name="mat_khau"  />
-                <button class="btn">Đăng kí</button>
-            </form>
-        </div>
-        <div class="overlay-container">
-            <button class="btn-1" id="switch-button">Đăng kí</button>
-        </div>
+    <div class="container">
+        
     </div>
 
-    <script>
-        const switchButton = document.getElementById('switch-button');
-        const container = document.getElementById('container');
 
-        switchButton.onclick = toggleForm;
-
-        function toggleForm() {
-            container.classList.toggle('right-panel-active');
-            switchButton.textContent = container.classList.contains('right-panel-active') ? 'Đăng nhập' : 'Đăng kí';
-        }
-    </script>
 </body>
+
 </html>
