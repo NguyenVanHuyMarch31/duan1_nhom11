@@ -25,9 +25,9 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            /* background: linear-gradient(to bottom, #175d69 23%, #330c43 95%); */
-            background-image: url('https://i.pinimg.com/originals/c7/f8/8f/c7f88f7ad16442235485c45a5fac0ea4.gif');
-            background-size: cover;
+            background: linear-gradient(to bottom, #175d69 23%, #330c43 95%);
+            /* background-image: url('https://i.pinimg.com/originals/c7/f8/8f/c7f88f7ad16442235485c45a5fac0ea4.gif'); */
+            /* background-size: cover; */
             /* background-position: center; */
             color: var(--white);
         }
@@ -116,43 +116,36 @@
     </div>
     <script>
         function validateSignUpForm() {
-            // Get form values
             var tenDangNhap = document.getElementById('ten_dang_nhap').value;
             var email = document.getElementById('email').value;
             var matKhau = document.getElementById('mat_khau').value;
 
-            // Validate the username field
             if (tenDangNhap.trim() === "") {
                 alert("Tên đăng nhập không được để trống.");
                 return false;
             }
 
-            // Validate the email field
             if (email.trim() === "") {
                 alert("Email không được để trống.");
                 return false;
             }
 
-            // Validate email format (simple regex)
             var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
             if (!emailPattern.test(email)) {
                 alert("Vui lòng nhập một địa chỉ email hợp lệ.");
                 return false;
             }
 
-            // Validate the password field
             if (matKhau.trim() === "") {
                 alert("Mật khẩu không được để trống.");
                 return false;
             }
 
-            // Optional: Password length validation (at least 6 characters)
             if (matKhau.length < 6) {
                 alert("Mật khẩu phải có ít nhất 6 ký tự.");
                 return false;
             }
 
-            // If validation passes, the form will submit
             return true;
         }
     </script>

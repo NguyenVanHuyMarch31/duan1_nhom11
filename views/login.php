@@ -95,9 +95,9 @@
         <a href="?act=trangchu" class="back-button">Quay lại</a>
         <h2>Đăng nhập</h2>
 
-        <form class="form" id="sign-in-form" action="<?= BASE_URL . '?act=dangnhap' ?>" method="post" onsubmit="return validateForm()">
+        <form class="form" id="sign-in-form" action="<?= BASE_URL . '?act=dangnhap' ?>" method="post" onsubmit="return validateSignUpForm()">
             <input class="input" type="text" placeholder="Tên đăng nhập" name="ten_dang_nhap" id="ten_dang_nhap"  />
-            <input class="input" type="password" placeholder="Password" name="mat_khau" id="mat_khau" required />
+            <input class="input" type="password" placeholder="Password" name="mat_khau" id="mat_khau"  />
             <button class="btn" type="submit">Đăng nhập</button>
         </form>
 
@@ -106,30 +106,25 @@
         <a href="?act=register" class="signup-link">Chưa có tài khoản? Đăng ký</a>
     </div>
     <script>
-        function validateForm() {
-            // Get form values
+        function validateSignUpForm() {
             var tenDangNhap = document.getElementById('ten_dang_nhap').value;
             var matKhau = document.getElementById('mat_khau').value;
 
-            // Validate the username field
             if (tenDangNhap.trim() === "") {
                 alert("Tên đăng nhập không được để trống.");
                 return false;
             }
 
-            // Validate the password field
             if (matKhau.trim() === "") {
                 alert("Mật khẩu không được để trống.");
                 return false;
             }
 
-            // Optional: Password length validation (at least 6 characters)
             if (matKhau.length < 6) {
                 alert("Mật khẩu phải có ít nhất 6 ký tự.");
                 return false;
             }
 
-            // If validation passes, the form will submit
             return true;
         }
     </script>
