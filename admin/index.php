@@ -6,6 +6,7 @@ require_once './controllers/yourController.php';
 require_once './controllers/quanTriTaiKhoanCotroller.php';
 require_once './controllers/quanTriTinTucController.php';
 
+
 //Model
 require_once './models/yourModel.php';
 require_once './models/quanTriTaiKhoanModel.php';
