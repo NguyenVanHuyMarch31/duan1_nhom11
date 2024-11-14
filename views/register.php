@@ -99,47 +99,56 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <a href="?act=trangchu" class="back-button">Quay lại</a>
+
         <h2>Đăng ký</h2>
-        <form action="<?= BASE_URL .'?act=dangky' ?>" method="post" onsubmit="return validateLog">
+        <form action="<?= BASE_URL . '?act=dangky' ?>" method="post" onsubmit="return validateSignUpForm()">
             <input class="input" type="text" placeholder="Tên đăng nhập" name="username" id="ten_dang_nhap" />
             <input class="input" type="email" placeholder="Email" name="email" id="email" />
             <input class="input" type="password" placeholder="Mật khẩu" name="password" id="mat_khau" />
             <button class="btn" type="submit">Đăng ký</button>
         </form>
-        <p>Đã có tài khoản? <a href="?act=dangnhap" class="login-link">Đăng nhập</a></p>
 
+        <a class="login-link" href="?act=login">Đã có tài khoản? Đăng nhập</a>
     </div>
     <script>
-        function validateLog() {
+        function validateSignUpForm() {
             var tenDangNhap = document.getElementById('ten_dang_nhap').value;
-            var matKhau = document.getElementById('mat_khau').value;
             var email = document.getElementById('email').value;
+            var matKhau = document.getElementById('mat_khau').value;
 
-            if(tenDangNhap.trim() ===  ""){
-                alert('Tên đăng nhập không được để trống');
+            if (tenDangNhap.trim() === "") {
+                alert("Tên đăng nhập không được để trống.");
                 return false;
             }
-            if(email.trim() ===  ""){
-                alert('Email không được để trống');
+
+            if (email.trim() === "") {
+                alert("Email không được để trống.");
                 return false;
             }
-            if(matKhau.trim() === ""){
-                alert("Mật khẩu không được để trống")
+
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailPattern.test(email)) {
+                alert("Vui lòng nhập một địa chỉ email hợp lệ.");
                 return false;
             }
-            if(matKhau.length <6){
-                alert("Mật khẩu phải có ít nhất 6 ký tự")
+
+            if (matKhau.trim() === "") {
+                alert("Mật khẩu không được để trống.");
                 return false;
             }
-            if(!(emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ ).test(email)){
-                alert("Email không đúng định dạng")
+
+            if (matKhau.length < 6) {
+                alert("Mật khẩu phải có ít nhất 6 ký tự.");
                 return false;
             }
+
             return true;
         }
     </script>
 </body>
+
 </html>

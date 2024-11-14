@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register - BeeFilmHub</title>
+    <title>Login - BeeFilmHub</title>
     <style>
         /* Importing Google font - Open Sans */
         @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
@@ -15,21 +15,19 @@
             --blue: #0367a6;
             --lightblue: #008997;
             --button-radius: 0.7rem;
+            --max-width: 400px;
+            --max-height: 420px;
             font-size: 16px;
             font-family: "Open Sans", sans-serif;
         }
 
         body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            height: 100vh;
+            width: 100%;
             margin: 0;
+            display: grid;
+            place-items: center;
             background: linear-gradient(to bottom, #175d69 23%, #330c43 95%);
-            /* background-image: url('https://i.pinimg.com/originals/c7/f8/8f/c7f88f7ad16442235485c45a5fac0ea4.gif'); */
-            /* background-size: cover; */
-            /* background-position: center; */
-            color: var(--white);
         }
 
         .container {
@@ -37,18 +35,20 @@
             border-radius: var(--button-radius);
             box-shadow: 0 0.9rem 1.7rem rgba(0, 0, 0, 0.25),
                 0 0.7rem 0.7rem rgba(0, 0, 0, 0.22);
-            width: 100%;
-            max-width: 400px;
-            padding: 2rem;
+            height: var(--max-height);
+            width: var(--max-width);
+            overflow: hidden;
+            position: relative;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            color: var(--gray);
+            justify-content: center;
+            flex-direction: column;
+            padding: 2rem;
         }
 
         .container h2 {
+            margin-bottom: 1rem;
             color: var(--gray);
-            margin-bottom: 1.5rem;
         }
 
         .input {
@@ -57,7 +57,6 @@
             padding: 0.9rem;
             margin: 0.5rem 0;
             width: 100%;
-            border-radius: var(--button-radius);
         }
 
         .btn {
@@ -73,21 +72,11 @@
             width: 100%;
         }
 
-
-        .btn:hover {
-            background-color: var(--lightblue);
-        }
-
-        .login-link {
+        .signup-link {
             margin-top: 1rem;
-            font-size: 0.9rem;
             color: var(--blue);
             text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .login-link:hover {
-            color: var(--lightblue);
+            font-weight: 500;
         }
 
         .back-button {
@@ -99,37 +88,46 @@
         }
     </style>
 </head>
+
 <body>
+
     <div class="container">
         <a href="?act=trangchu" class="back-button">Quay lại</a>
         <h2>Đăng nhập</h2>
-        <form action="<?= BASE_URL .'?act=dangnhap' ?>" method="post" onsubmit="return validateLog">
-            <input class="input" type="text" placeholder="Tên đăng nhập" name="username" id="ten_dang_nhap" />
-            <input class="input" type="password" placeholder="Mật khẩu" name="password" id="mat_khau" />
+
+        <form class="form" id="sign-in-form" action="<?= BASE_URL . '?act=dangnhap' ?>" method="post" onsubmit="return validateSignUpForm()">
+            <input class="input" type="text" placeholder="Tên đăng nhập" name="username" id="ten_dang_nhap"  />
+            <input class="input" type="password" placeholder="Password" name="password" id="mat_khau"  />
             <button class="btn" type="submit">Đăng nhập</button>
         </form>
-        <p>Chưa có tài khoản? <a href="?act=dangky" class="login-link">Đăng kí</a></p>
 
+        <div id="error-message" style="color: red;"></div>
+
+        <a href="?act=register" class="signup-link">Chưa có tài khoản? Đăng ký</a>
     </div>
     <script>
-        function validateLog() {
+        function validateSignUpForm() {
             var tenDangNhap = document.getElementById('ten_dang_nhap').value;
             var matKhau = document.getElementById('mat_khau').value;
 
-            if(tenDangNhap.trim() ===  ""){
-                alert('Tên đăng nhập không được để trống');
+            if (tenDangNhap.trim() === "") {
+                alert("Tên đăng nhập không được để trống.");
                 return false;
             }
-            if(matKhau.trim() === ""){
-                alert("Mật khẩu không được để trống")
+
+            if (matKhau.trim() === "") {
+                alert("Mật khẩu không được để trống.");
                 return false;
             }
-            if(matKhau.length <6){
-                alert("Mật khẩu phải có ít nhất 6 ký tự")
+
+            if (matKhau.length < 6) {
+                alert("Mật khẩu phải có ít nhất 6 ký tự.");
                 return false;
             }
+
             return true;
         }
     </script>
 </body>
+
 </html>

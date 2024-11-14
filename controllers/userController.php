@@ -1,54 +1,98 @@
 <?php
-    class UserController {
-        public $modelLog;
+class UserController
+{
+    public $modelProduct;
 
-        public function __construct() {
-            session_start(); // Bắt đầu session
-            $this->modelLog = new UserModel();
+    public function __construct()
+    {
+        $this->modelProduct = new userModel();
+    }
+
+    public function trangchu()
+    {
+        require_once './views/trangchu.php';
+    }
+    public function formLogin()
+    {
+        require_once './views/login.php';
+    }
+    public function formRegister()
+    {
+        require_once './views/register.php';
+    }
+
+    public function postRegister()
+    {
+        $errors = [];
+
+        if (empty($_POST['username'])) {
+            $errors[] = "Tên đăng nhập không được để trống.";
+        }
+        if (empty($_POST['email'])) {
+            $errors[] = "Email không được để trống.";
+        }
+        if (empty($_POST['password'])) {
+            $errors[] = "Mật khẩu không được để trống.";
         }
 
-        public function trangchu() {
-            require_once './views/trangchu.php';
-        }
-
-        public function formRegister() {
-            require_once './views/register.php';
-        }
-
-        public function postRegister() {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $email = $_POST['email'];
-            if($this->modelLog->postRegisterSubmit($username, $password, $email)){
-                header('Location: '.BASE_URL.'?act=trangchu');
-                exit();
-            } else {
-                echo "Đăng ký thất bại!";
+        if (!empty($errors)) {
+            foreach ($errors as $error) {
+                echo "<script>
+                    alert('$error');
+                </script>";
             }
+            return;
         }
 
-        public function formLogin() {
-            require_once './views/login.php';
-        }
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
 
-        public function postLogin() {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $user = $this->modelLog->getUserLogin($username);
-
-            if ($user && password_verify($password, $user['password'])) {
-                $_SESSION['username'] = $username;
-                $_SESSION['role_id'] = $user['role_id'];
-                
-                if ($user['role_id'] == 1) {
-                    header('Location: '.BASE_URL . '?act=trangchu');
-                } else if ($user['role_id'] == 2) {
-                    header('Location: '.BASE_URL_ADMIN.'?act=/');
-                }
-                exit();
-            } else {
-                echo "Tên đăng nhập hoặc mật khẩu không đúng!";
-            }
+        if ($this->modelProduct->postRegisterSubmit($username, $password, $email)) {
+            header('Location: ' . BASE_URL . '?act=trangchu');
+            exit;
+        } else {
+            echo "Đăng ký không thành công.";
         }
     }
+
+    public function postLogin()
+    {
+        $errors = [];
+
+        if (empty($_POST['username'])) {
+            $errors[] = "Tên đăng nhập không được để trống.";
+        }
+        if (empty($_POST['password'])) {
+            $errors[] = "Mật khẩu không được để trống.";
+        }
+
+        if (!empty($errors)) {
+            foreach ($errors as $error) {
+                echo $error . "<br>";
+            }
+            return;
+        }
+
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        $user = $this->modelProduct->getUserByUsername($username);
+
+        if ($user && $user['password'] === $password) {
+            $_SESSION['ten_dang_nhap'] = $username;
+            $_SESSION['role'] = $user['role_id'];
+
+            if ($user['role_id'] == 2 ) {
+                header('Location: ' . BASE_URL_ADMIN . '?act=/');
+            } else if ($user['role_id'] == 1) {
+                header('Location: ' . BASE_URL . '?act=trangchu');
+            }
+            exit;
+        } else {
+            echo "Đăng nhập không thành công. Kiểm tra lại tên đăng nhập hoặc mật khẩu.";
+        }
+    }
+}
+
 ?>
