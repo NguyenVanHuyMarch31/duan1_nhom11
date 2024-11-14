@@ -1,9 +1,9 @@
 <?php
-class NewsController {
+class quanTriTinTucController {
     private $modelNews;
 
     public function __construct() {
-        $this->modelNews = new NewsModel();
+        $this->modelNews = new quanTriTinTucModel();
     }
 
     // Hiển thị danh sách các bài viết

@@ -1,5 +1,5 @@
 <?php
-    class  taiKhoanModel {
+    class quanTriTaiKhoanModel {
         public $conn;
         public function __construct(){
             $this->conn = connectDB();

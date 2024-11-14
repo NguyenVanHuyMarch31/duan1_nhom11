@@ -1,5 +1,5 @@
 <?php
-class NewsModel {
+class quanTriTinTucModel {
     private $conn;
 
     public function __construct() {

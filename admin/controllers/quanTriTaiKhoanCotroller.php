@@ -1,10 +1,10 @@
 <?php
-class taiKhoanController {
+class quanTriTaiKhoanController {
     public $modelTaiKhoan;
 
     public function __construct()
     {
-        $this->modelTaiKhoan = new taiKhoanModel();
+        $this->modelTaiKhoan = new quanTriTaiKhoanModel();
     }
 
     public function danhSachTaiKhoan()
