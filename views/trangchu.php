@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BFH BeeFilmHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        /* Importing Google font - Open Sans */
         @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
 
         :root {
@@ -16,31 +17,34 @@
             --lightblue: #008997;
             --button-radius: 0.7rem;
             --max-width: 758px;
-            --max-height: 420px;
             --font-family: "Open Sans", sans-serif;
             --font-size: 16px;
             --bg-color: #fff;
-            font-size: var(--font-size);
-            font-family: var(--font-family);
+            --primary-color: #175d69;
+            --hover-color: #330c43;
         }
 
         body {
+            font-size: var(--font-size);
+            font-family: var(--font-family);
             height: 100vh;
             margin: 0;
-            display: grid;
-            place-items: center;
+            display: flex;
+            flex-direction: column;
             background: var(--bg-color);
+            align-items: center;
+            justify-content: space-between;
         }
 
-        /* Navbar Styles */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(to bottom, #175d69, #330c43);
-            padding: 10px 0;
+            background: var(--bg-color);
+            padding: 1rem 0;
             z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .navbar {
@@ -49,7 +53,7 @@
             justify-content: space-between;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 1rem;
         }
 
         .navbar .logo a {
@@ -59,55 +63,85 @@
         }
 
         .navbar .logo img {
-            width: 100%;
-            max-width: 270px;
-            height: auto;
+            width: 50px;
+            height: 50px;
         }
 
         .navbar .links {
             display: flex;
             align-items: center;
             list-style: none;
-            gap: 35px;
+            gap: 2rem;
         }
 
         .navbar .links a {
             font-weight: 500;
             text-decoration: none;
-            color: #fff;
+            color: var(--primary-color);
             padding: 10px 0;
-            transition: 0.2s ease;
+            transition: color 0.2s ease;
+        }
+
+        .navbar .links a:hover {
+            color: var(--hover-color);
+            transition: color 0.2s ease;
+            text-decoration: underline;
         }
 
         .navbar .buttons .signup {
-            border: 1px solid #fff;
-            padding: 10px;
-            border-radius: 10%;
-            background-color: linear-gradient(to bottom, #175d69, #330c43);
-            transition: 0.2s ease;
+            border: 1px solid var(--primary-color);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            background: linear-gradient(to bottom, var(--primary-color) 23%, var(--hover-color) 95%);
             color: #fff;
             text-decoration: none;
+            transition: background-color 0.2s ease;
         }
 
-        /* Hamburger Menu */
-        #menu-toggle {
-            display: none;
+        .navbar .buttons .signup:hover {
+            background-color: var(--hover-color);
         }
 
-        #hamburger-btn {
-            display: none;
+        footer {
+            width: 100%;
+            background-color: var(--primary-color);
+            padding: 1rem 0;
+            color: var(--white);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer .footer-content {
+            display: flex;
             flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
+            align-items: center;
+            gap: 10px;
         }
 
-        #hamburger-btn div {
-            width: 30px;
-            height: 4px;
-            background: linear-gradient(to bottom, #175d69, #330c43);
+        footer .footer-content a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 10px;
         }
 
-        /* Media Query for Small Screens */
+        footer .footer-content a:hover {
+            color: var(--hover-color);
+        }
+
+        footer .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        footer .social-icons a {
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+
+        footer .social-icons a:hover {
+            color: var(--hover-color);
+        }
+
         @media (max-width: 768px) {
             .navbar .links {
                 display: none;
@@ -115,107 +149,59 @@
                 top: 80px;
                 left: 0;
                 right: 0;
-                background: #175d69;
-                padding: 20px;
+                background: var(--primary-color);
+                padding: 1rem;
                 flex-direction: column;
-                gap: 15px;
+                gap: 1rem;
             }
 
             .navbar .links a {
-                padding: 10px 0;
+                color: var(--white);
                 font-size: 1.2rem;
             }
 
-            #menu-toggle:checked+#hamburger-btn+.links {
+            #menu-toggle:checked + .navbar .links {
                 display: flex;
             }
 
             #hamburger-btn {
                 display: flex;
+                flex-direction: column;
+                gap: 5px;
+                cursor: pointer;
+            }
+
+            #hamburger-btn div {
+                width: 30px;
+                height: 4px;
+                background: var(--primary-color);
             }
         }
 
-        /* Overlay Form Container */
-        .container {
-            background-color: var(--white);
-            border-radius: var(--button-radius);
-            box-shadow: 0 0.9rem 1.7rem rgba(0, 0, 0, 0.25), 0 0.7rem 0.7rem rgba(0, 0, 0, 0.22);
-            height: var(--max-height);
-            max-width: var(--max-width);
-            overflow: hidden;
-            position: relative;
-            width: 100%;
-            display: flex;
-            transition: transform 0.6s ease-in-out;
+        .bee {
+            color: #FFCC00;
+            font-size: 3.125rem;
         }
 
-        .container__form {
-            width: 50%;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: var(--white);
-        }
-
-        .form h2 {
-            margin-bottom: 1rem;
+        .filmhub {
             color: var(--gray);
+            font-size: 2.5rem;
         }
 
-        .input {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 0.9rem;
-            margin: 0.5rem 0;
-            width: 100%;
+        .logo .bee,
+        .logo .filmhub {
+            position: relative;
+            top: -10px;
         }
 
-        .btn {
-            background-image: url('https://i.pinimg.com/originals/f5/f2/74/f5f27448c036af645c27467c789ad759.gif');
-            color: var(--white);
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: bold;
-            padding: 0.9rem 2rem;
-            margin-top: 1rem;
-            border: none;
-            border-radius: var(--button-radius);
+        .logo .bee {
+            font-family: 'Doto', sans-serif;
+            font-weight: 700;
         }
 
-        /* Overlay */
-        .overlay-container {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            background-image: url('../images/BFH.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 525px;
-            width: 474px;
-            background-color: var(--lightblue);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: transform 0.6s ease-in-out;
-        }
-
-        .container.right-panel-active .overlay-container {
-            transform: translateX(-100%);
-        }
-
-        .btn-1 {
-            background-image: url('https://i.pinimg.com/236x/bf/a1/30/bfa1301d8df7a2a1f8b89a7d8d44d506.jpg');
-            color: var(--white);
-            cursor: pointer;
-            text-align: center;
-            font-size: 0.9rem;
-            font-weight: bold;
-            padding: 16px 32px;
-            border: none;
-            border-radius: var(--button-radius);
+        .logo .filmhub {
+            font-family: 'Doto', sans-serif;
+            font-weight: 400;
         }
     </style>
 </head>
@@ -225,29 +211,42 @@
         <nav class="navbar">
             <div class="logo">
                 <a href="?act=trangchu">
-                    <img src="https://scontent.fhan14-1.fna.fbcdn.net/v/t1.15752-9/462568801_601351862462540_8090446170272868322_n.png?_nc_cat=101&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeG3WeBtPV6KnC_8c9sG66zt_btnVtBznh79u2dW0HOeHvmWv3csFmmqauUGviv9bo7QPUc9mlUJGw54c9G1bdh9&_nc_ohc=L-xGH3BEF_IQ7kNvgGRcio7&_nc_zt=23&_nc_ht=scontent.fhan14-1.fna&_nc_gid=AWe5PMv4-06Hq-5DfwJPpNn&oh=03_Q7cD1QFTZGnONi4PVUdgmUhAPSU2y5gzq7RjqxIVBpg8MZ_Xiw&oe=674F1083" alt="BeeFilmHub Logo" />
-
+                    <img src="https://i.pinimg.com/736x/76/42/ca/7642ca38bdb1c1f4692a1bb3c1e2f5cc.jpg" alt="BeeFilmHub Logo" />
+                    <span class="bee">Bee</span><span class="filmhub">FilmHub</span>
                 </a>
             </div>
-            <input type="checkbox" id="menu-toggle" />
             <ul class="links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Portfolio</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Phim</a></li>
+                <li><a href="#">Thể loại</a></li>
+                <li><a href="#">Tin mới & Ưu đãi</a></li>
+                <li><a href="#">Liên hệ</a></li>
             </ul>
             <div class="buttons">
-                <a href="?act=register" id="signup-button" class="signup">Đăng kí</a>
-                <a href="?act=login" id="signin-button" class="signup">Đăng nhập</a>
+                <a href="?act=register" class="signup">Đăng kí</a>
+                <a href="?act=login" class="signup">Đăng nhập</a>
             </div>
         </nav>
     </header>
-    <div class="container">
-        
-    </div>
 
+    <main style="padding-top: 70px; text-align: center;">
+        <h1>Welcome to BeeFilmHub</h1>
+        <p>Your hub for all things film. Discover new movies, watch trailers, and more.</p>
+    </main>
 
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 BeeFilmHub. Team11-CHH.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div>
+                <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

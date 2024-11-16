@@ -3,7 +3,6 @@ class quanTriTinTucModel {
     private $conn;
 
     public function __construct() {
-        // Giả sử connectDB() là một hàm kết nối cơ sở dữ liệu đã được định nghĩa
         $this->conn = connectDB();
     }
 
@@ -11,7 +10,6 @@ class quanTriTinTucModel {
         $this->conn = null;
     }
 
-    // Lấy tất cả bài viết tin tức
     public function getAllNews() {
         $sql = "SELECT * FROM news";
         $stmt = $this->conn->prepare($sql);
@@ -19,13 +17,32 @@ class quanTriTinTucModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Lấy một bài viết theo ID
-    public function getNewsById($news_id) {
-        $sql = "SELECT * FROM news WHERE news_id = :news_id";
+    public function insertNew($title, $author, $publish_date, $content, $file_thumb)
+{
+    try {
+        $sql = "INSERT INTO news (title, author, publish_date, content, thumbnail) 
+                VALUES (:title, :author, :publish_date, :content, :thumbnail)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':news_id', $news_id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->execute([
+            ':title' => $title,
+            ':author' => $author,
+            ':publish_date' => $publish_date,
+            ':content' => $content,
+            ':thumbnail' => $file_thumb
+        ]);
+        return $stmt->rowCount() > 0;
+    } catch (Exception $e) {
+        error_log("Error inserting news: " . $e->getMessage());
+        return false;
     }
 }
+public function get_list_news($news_id) {
+    $sql = "DELETE FROM news WHERE news_id = :news_id";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute([':news_id' => $news_id]);
+    return $stmt->rowCount() > 0;
+}
+    
+}
+
 ?>

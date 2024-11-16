@@ -73,19 +73,6 @@
         #cellPaiChart {
             height: 160px;
         }
-
-        .details-btn {
-            width: calc(2 * (50px + 5px) - 5px);
-        }
-
-        .btn-group a button {
-            min-width: 50px;
-        }
-
-        .span {
-            max-width: 50px
-        }
-        
     </style>
 </head>
 
@@ -94,11 +81,11 @@
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav">
                     <li class="menu-item dropdown">
                         <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"> <i class="menu-icon fa fa-home"></i>Quản lý tin tức</a>
                     </li>
-
+                    
                     <li class="menu-item dropdown">
                         <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-video-camera"></i>Quản lý phòng phim
                         </a>
@@ -112,7 +99,7 @@
                         <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-comments"></i>Quản lý bình luận
                         </a>
                     </li>
-
+                    
                     <li class="menu-item dropdown">
                         <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-laptop"></i>Quản lý suất chiếu
                         </a>
@@ -130,7 +117,7 @@
                     <li class="menu-item dropdown">
                         <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-users"></i>Quản lý tài khoản</a>
                     </li>
-
+                    
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -142,7 +129,7 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./"><img src="/duan1_Nhom11/images/logo2.png" alt="Logo" width="260px" height="40px"></a>
+                    <a class="navbar-brand" href="./"><img src="/duan1_Nhom11/images/logo2.png" alt="Logo" width="260px" height="40px" ></a>
                     <a class="navbar-brand hidden" href="./"><img src="/duan1_Nhom11/images/logo2.png" alt="Logo1" width="100px" height="40px"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
@@ -185,51 +172,58 @@
             <!-- Animated -->
             <div class="animated fadeIn">
                 <h3>Quản lí tin tức</h3>
-                <div class="card-header">
-                    <a href="<?php echo BASE_URL_ADMIN . '?act=themTinTuc' ?>">
-                        <button class="btn btn-success">Thêm mới tin tức</button>
-                    </a>
-                </div>
+
                 <div class="table-stats order-table ov-h">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Tiêu đề</th>
-                <th>Nội dung</th>
-                <th>Ngày nhập</th>
-                <th>Tác giả</th>
-                <th>Hình ảnh</th>
-                <th>Thao tác</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($newsList as $key => $newList) { ?>
-                <tr>
-                    <td><?= $key + 1 ?></td>
-                    <td><?= $newList['title'] ?></td>
-                    <td><?= $newList['content'] ?></td>
-                    <td><?= $newList['publish_date'] ?></td>
-                    <td><?= $newList['author'] ?></td>
-                    <td>
-                        <img src="<?= BASE_URL . $newList["thumbnail"] ?>" width="100px" alt="Thumbnail"
-                             onerror="this.onerror=null; this.src='https://i.pinimg.com/474x/8b/ec/ad/8becad61ee85c3c02b460bddf5ba7905.jpg'">
-                    </td>
-                    <td>
-                        <div class="btn-group">
-                            <a href="<?= BASE_URL_ADMIN . '?act=suaTinTuc&news_id=' . $newList['news_id'] ?>" class="btn btn-primary">Sửa</a>
-                            <a href="<?= BASE_URL_ADMIN . '?act=deleteTinTuc&news_id=' . $newList['news_id'] ?>" onclick="return confirm('Bạn có muốn xóa tin tức này không?')" class="btn btn-warning">Xóa</a>
-                            <a href="<?= BASE_URL_ADMIN . '?act=suaTinTuc&news_id=' . $newList['news_id'] ?>" class="btn btn-info">Chi Tiết</a>
-                        </div>
-                    </td>
-                </tr>
-            <?php } ?>
-        </tbody>
-    </table>
-</div>
+                    <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tiêu đề</th>
+                            <th>Nội dung</th>
+                            <th>Ngày nhập</th>
+                            <th>Tác giả</th>
+                            <th>Hình ảnh</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($newsList as $key=>$newList){
+                            ?>
+                            <tr>
+                                <td><?= $key + 1 ?></td>
+                                <td><?= $newList['title'] ?></td>
+                                <td><?= $newList['content'] ?></td>
+                                <td><?= $newList['publish_date'] ?></td>
+                                <td><?= $newList['author'] ?></td>
+                                <td><?= $newList['thumbnail'] ?></td>
+                                <!-- <td><img src="<?= BASE_URL . $newList['thumbnali'] ?>" width="100px" height="100px" alt="" 
+                                onerror="this.onerror=null;this.src='https://i.pinimg.com/originals/d9/bb/0a/d9bb0acee9483e810062c9972dab6734.gif'"></td> -->
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="#">
+                                            <button class="btn btn-primary">Edit</button>
+                                        </a>
+                                        <a href="#">
+                                            <button class="btn btn-warning">Delete</button>
+                                        </a>
+                                        <a href="#">
+                                            <button class="btn btn-danger">Add</button>
+                                        </a>
+                                        <a href="#">
+                                            <button class="btn btn-info">Details</button>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php
+                        }
 
+                        ?>
+                    </tbody>
+                </table>
+            </div>
 
-
+                
             </div>
             <!-- .animated -->
         </div>
@@ -237,19 +231,19 @@
         <div class="clearfix"></div>
         <!-- Footer -->
         <footer class="site-footer">
-            <div class="footer-inner bg-white">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h4>BEEFILMHUB</h4>
-                        <p>Cổng thông tin giải trí phim và trải nghiệm điện ảnh tốt nhất.</p>
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        <p>&copy; 2024 BEEFILMHUB</p>
-                        <p>Thiết kế bởi <a href="https://yourwebsite.com">Nhóm 11 - BFH</a></p>
-                    </div>
-                </div>
+    <div class="footer-inner bg-white">
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>BEEFILMHUB</h4>
+                <p>Cổng thông tin giải trí phim và trải nghiệm điện ảnh tốt nhất.</p>
             </div>
-        </footer>
+            <div class="col-sm-6 text-right">
+                <p>&copy; 2024 BEEFILMHUB</p>
+                <p>Thiết kế bởi <a href="https://yourwebsite.com">Nhóm 11 - BFH</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
 
         <!-- /.site-footer -->
     </div>
@@ -282,8 +276,8 @@
 
     <!--Local Stuff-->
     <script>
-
+        
     </script>
 </body>
 
-</html>
+</html>                                                                                                                                                                    

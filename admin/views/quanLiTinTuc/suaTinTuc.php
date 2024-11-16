@@ -73,19 +73,6 @@
         #cellPaiChart {
             height: 160px;
         }
-
-        .details-btn {
-            width: calc(2 * (50px + 5px) - 5px);
-        }
-
-        .btn-group a button {
-            min-width: 50px;
-        }
-
-        .span {
-            max-width: 50px
-        }
-        
     </style>
 </head>
 
@@ -182,108 +169,127 @@
         <!-- /#header -->
         <!-- Content -->
         <div class="content">
-            <!-- Animated -->
             <div class="animated fadeIn">
-                <h3>Quản lí tin tức</h3>
-                <div class="card-header">
-                    <a href="<?php echo BASE_URL_ADMIN . '?act=themTinTuc' ?>">
-                        <button class="btn btn-success">Thêm mới tin tức</button>
-                    </a>
-                </div>
-                <div class="table-stats order-table ov-h">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Tiêu đề</th>
-                <th>Nội dung</th>
-                <th>Ngày nhập</th>
-                <th>Tác giả</th>
-                <th>Hình ảnh</th>
-                <th>Thao tác</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($newsList as $key => $newList) { ?>
-                <tr>
-                    <td><?= $key + 1 ?></td>
-                    <td><?= $newList['title'] ?></td>
-                    <td><?= $newList['content'] ?></td>
-                    <td><?= $newList['publish_date'] ?></td>
-                    <td><?= $newList['author'] ?></td>
-                    <td>
-                        <img src="<?= BASE_URL . $newList["thumbnail"] ?>" width="100px" alt="Thumbnail"
-                             onerror="this.onerror=null; this.src='https://i.pinimg.com/474x/8b/ec/ad/8becad61ee85c3c02b460bddf5ba7905.jpg'">
-                    </td>
-                    <td>
-                        <div class="btn-group">
-                            <a href="<?= BASE_URL_ADMIN . '?act=suaTinTuc&news_id=' . $newList['news_id'] ?>" class="btn btn-primary">Sửa</a>
-                            <a href="<?= BASE_URL_ADMIN . '?act=deleteTinTuc&news_id=' . $newList['news_id'] ?>" onclick="return confirm('Bạn có muốn xóa tin tức này không?')" class="btn btn-warning">Xóa</a>
-                            <a href="<?= BASE_URL_ADMIN . '?act=suaTinTuc&news_id=' . $newList['news_id'] ?>" class="btn btn-info">Chi Tiết</a>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Thêm Tin Tức</h3>
                         </div>
-                    </td>
-                </tr>
-            <?php } ?>
-        </tbody>
-    </table>
-</div>
+                        <div class="card-body card-block">
+                            <form action="<?php echo BASE_URL_ADMIN . '?act=postTinTuc'; ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
 
+                                <!-- Title -->
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="title" class="form-control-label">Tiêu đề</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="text" id="title" name="title" placeholder="Viết tiêu đề vào đây" class="form-control" value="<?= $_POST['title'] ?? ''; ?>">
+                                        <?php if (isset($_SESSION['error']['title'])): ?>
+                                            <p class="text-danger"><?= $_SESSION['error']['title'] ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
 
+                                <!-- Author -->
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="author" class="form-control-label">Tác giả</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="text" id="author" name="author" placeholder="BeeFilmHub Team" class="form-control" value="<?= $_POST['author'] ?? ''; ?>">
+                                        <?php if (isset($_SESSION['error']['author'])): ?>
+                                            <p class="text-danger"><?= $_SESSION['error']['author'] ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
 
-            </div>
-            <!-- .animated -->
-        </div>
-        <!-- /.content -->
-        <div class="clearfix"></div>
-        <!-- Footer -->
-        <footer class="site-footer">
-            <div class="footer-inner bg-white">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h4>BEEFILMHUB</h4>
-                        <p>Cổng thông tin giải trí phim và trải nghiệm điện ảnh tốt nhất.</p>
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        <p>&copy; 2024 BEEFILMHUB</p>
-                        <p>Thiết kế bởi <a href="https://yourwebsite.com">Nhóm 11 - BFH</a></p>
+                                <!-- Publish Date -->
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="publish_date" class="form-control-label">Ngày nhập</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="date" id="publish_date" name="publish_date" class="form-control" value="<?= $_POST['publish_date'] ?? ''; ?>">
+                                        <?php if (isset($_SESSION['error']['ngay_nhap'])): ?>
+                                            <p class="text-danger"><?= $_SESSION['error']['ngay_nhap'] ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+
+                                <!-- Thumbnail -->
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="thumbnail" class="form-control-label">Hình ảnh</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="file" id="thumbnail" name="thumbnail" class="form-control-file">
+                                        <?php if (isset($_SESSION['error']['thumbnail'])): ?>
+                                            <p class="text-danger"><?= $_SESSION['error']['thumbnail'] ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+
+                                <!-- Content -->
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="content" class="form-control-label">Nội dung</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <textarea name="content" id="content" rows="9" placeholder="Nội dung ....." class="form-control"><?= $_POST['content'] ?? ''; ?></textarea>
+                                        <?php if (isset($_SESSION['error']['content'])): ?>
+                                            <p class="text-danger"><?= $_SESSION['error']['content'] ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-dot-circle-o"></i> Submit
+                                    </button>
+                                    <button type="reset" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-ban"></i> Reset
+                                    </button>
+                                </div>
+
+                            </form>
+                            <?php if (isset($_SESSION['error'])): ?>
+                                <div class="error-messages">
+                                    <?php foreach ($_SESSION['error'] as $message): ?>
+                                        <p><?= $message ?></p>
+                                    <?php endforeach; ?>
+                                    <?php unset($_SESSION['error']); ?>
+                                </div>
+                            <?php endif; ?>
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
 
-        <!-- /.site-footer -->
-    </div>
-    <!-- /#right-panel -->
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="assets/js/main.js"></script>
+        <!-- /#right-panel -->
 
-    <!--  Chart js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+        <script src="assets/js/main.js"></script>
 
-    <!--Chartist Chart-->
-    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
+        <!--  Chart js -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+        <!--Chartist Chart-->
+        <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
-    <script src="assets/js/init/weather-init.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-    <script src="assets/js/init/fullcalendar-init.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
+        <script src="assets/js/init/weather-init.js"></script>
 
-    <!--Local Stuff-->
-    <script>
+        <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+        <script src="assets/js/init/fullcalendar-init.js"></script>
 
-    </script>
+        <!--Local Stuff-->
+        <script>
+
+        </script>
 </body>
 
 </html>
