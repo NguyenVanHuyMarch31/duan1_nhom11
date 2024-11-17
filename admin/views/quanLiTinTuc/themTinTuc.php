@@ -73,11 +73,6 @@
         #cellPaiChart {
             height: 160px;
         }
-
-        .error {
-            color: red;
-            font-size: 14px;
-        }
     </style>
 </head>
 
@@ -181,25 +176,29 @@
                             <h3>Thêm Tin Tức</h3>
                         </div>
                         <div class="card-body card-block">
-                            <form action="<?php echo BASE_URL_ADMIN . '?act=postTinTuc'; ?>" method="post" id="formTinTuc" enctype="multipart/form-data" class="form-horizontal">
+                            <form action="<?php echo BASE_URL_ADMIN . '?act=postTinTuc'; ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
 
                                 <!-- Title -->
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="title" class="form-control-label">Tiêu đề</label></div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="tieu_de" name="tieu_de" placeholder="Nhập tiêu đề tại đây" class="form-control">
-                                        <p class="error" id="loiTieuDe"></p>
+                                        <input type="text" id="title" name="title" placeholder="Viết tiêu đề vào đây"
+                                            value="<?php echo isset($_POST['title']) ? $_POST['title'] : ''; ?>" class="form-control">
+                                        <?php if (isset($_SESSION['error']['title'])): ?>
+                                            <p class="text-danger"><?= $_SESSION['error']['title'] ?></p>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
-
 
                                 <!-- Author -->
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="author" class="form-control-label">Tác giả</label></div>
                                     <div class="col-12 col-md-9">
-
-                                        <input type="text" id="tac_gia" name="tac_gia" placeholder="Nhập tên tác giả" class="form-control">
-                                        <p class="error" id="loiTacGia"></p>
+                                        <input type="text" id="author" name="author" placeholder="BeeFilmHub Team"
+                                            value="<?php echo isset($_POST['author']) ? $_POST['author'] : ''; ?>" class="form-control">
+                                        <?php if (isset($_SESSION['error']['author'])): ?>
+                                            <p class="text-danger"><?= $_SESSION['error']['author'] ?></p>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
 
@@ -207,11 +206,14 @@
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="publish_date" class="form-control-label">Ngày nhập</label></div>
                                     <div class="col-12 col-md-9">
-
-                                        <input type="date" id="ngay_nhap" name="ngay_nhap" class="form-control">
-                                        <p class="error" id="loiNgayNhap"></p>
+                                        <input type="date" id="publish_date" name="publish_date"
+                                            value="<?php echo isset($_POST['publish_date']) ? $_POST['publish_date'] : ''; ?>" class="form-control">
+                                        <?php if (isset($_SESSION['error']['ngay_nhap'])): ?>
+                                            <p class="text-danger"><?= $_SESSION['error']['ngay_nhap'] ?></p>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
+
                                 <!-- Thumbnail -->
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="thumbnail" class="form-control-label">Hình ảnh</label></div>
@@ -222,11 +224,12 @@
                                         <?php endif; ?>
                                     </div>
                                 </div>
+
                                 <!-- Content -->
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="content" class="form-control-label">Nội dung</label></div>
                                     <div class="col-12 col-md-9">
-                                        <textarea name="content" id="content" rows="9" placeholder="Nội dung ....." class="form-control"></textarea>
+                                        <textarea name="content" id="content" rows="9" placeholder="Nội dung ....." class="form-control"><?php echo isset($_POST['content']) ? $_POST['content'] : ''; ?></textarea>
                                         <?php if (isset($_SESSION['error']['content'])): ?>
                                             <p class="text-danger"><?= $_SESSION['error']['content'] ?></p>
                                         <?php endif; ?>
@@ -241,17 +244,7 @@
                                         <i class="fa fa-ban"></i> Reset
                                     </button>
                                 </div>
-
                             </form>
-                            <?php if (isset($_SESSION['error'])): ?>
-                                <div class="error-messages">
-                                    <?php foreach ($_SESSION['error'] as $message): ?>
-                                        <p><?= $message ?></p>
-                                    <?php endforeach; ?>
-                                    <?php unset($_SESSION['error']); ?>
-                                </div>
-                            <?php endif; ?>
-
                         </div>
                     </div>
                 </div>
@@ -288,39 +281,7 @@
 
         <!--Local Stuff-->
         <script>
-            document.getElementById('formTinTuc').addEventListener('submit', function(e) {
-                e.preventDefault(); // Ngăn chặn hành vi gửi form mặc định
-                let hopLe = true;
 
-                // Xóa thông báo lỗi cũ
-                document.querySelectorAll('.error').forEach(el => el.textContent = '');
-
-                // Kiểm tra Tiêu đề
-                const tieuDe = document.getElementById('tieu_de').value.trim();
-                if (tieuDe === '') {
-                    document.getElementById('loiTieuDe').textContent = 'Tiêu đề không được để trống.';
-                    hopLe = false;
-                }
-
-                // Kiểm tra Tác giả
-                const tacGia = document.getElementById('tac_gia').value.trim();
-                if (tacGia === '') {
-                    document.getElementById('loiTacGia').textContent = 'Tác giả không được để trống.';
-                    hopLe = false;
-                }
-
-                // Kiểm tra Ngày nhập
-                const ngayNhap = document.getElementById('ngay_nhap').value;
-                if (ngayNhap === '') {
-                    document.getElementById('loiNgayNhap').textContent = 'Ngày nhập không được để trống.';
-                    hopLe = false;
-                }
-                // Nếu tất cả hợp lệ, gửi form
-                if (hopLe) {
-                    alert('Form hợp lệ! Đang gửi...');
-                    e.target.submit();
-                }
-            });
         </script>
 </body>
 

@@ -199,7 +199,7 @@
                 <th>Nội dung</th>
                 <th>Ngày nhập</th>
                 <th>Tác giả</th>
-                <th>Hình ảnh</th>
+                <th style="width: 100px;">Hình ảnh</th>
                 <th>Thao tác</th>
             </tr>
         </thead>
@@ -212,7 +212,7 @@
                     <td><?= $newList['publish_date'] ?></td>
                     <td><?= $newList['author'] ?></td>
                     <td>
-                        <img src="<?= BASE_URL . $newList["thumbnail"] ?>" width="100px" alt="Thumbnail"
+                        <img src="<?= BASE_URL . $newList["thumbnail"] ?>" style="width: 100px;" alt="Thumbnail"
                              onerror="this.onerror=null; this.src='https://i.pinimg.com/474x/8b/ec/ad/8becad61ee85c3c02b460bddf5ba7905.jpg'">
                     </td>
                     <td>
