@@ -16,6 +16,7 @@ $act = $_GET['act'] ?? '/';
 match ($act) {
     '/' => (new yourController())->trangchu(),
     'trangchu' => (new yourController())->trangchu(),
+
     'quanTriTinTuc' => (new quanTriTinTucController())->tinTuc(),
     'themTinTuc' => (new quanTriTinTucController())->themTinTuc(),
     'postTinTuc' => (new quanTriTinTucController())->postTinTuc(),
@@ -23,6 +24,7 @@ match ($act) {
     'suaTinTuc' => (new quanTriTinTucController())->suaTinTuc(),
     'editTintuc' => (new quanTriTinTucController())->editTintuc(),
     'chiTietTinTuc' => (new quanTriTinTucController())->chiTietTinTuc(),
+    
 
 
 

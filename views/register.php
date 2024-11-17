@@ -26,7 +26,9 @@
             min-height: 100vh;
             margin: 0;
             background: linear-gradient(to bottom, #175d69 23%, #330c43 95%);
-            flex-direction: column;
+            /* background-image: url('https://i.pinimg.com/originals/c7/f8/8f/c7f88f7ad16442235485c45a5fac0ea4.gif'); */
+            /* background-size: cover; */
+            /* background-position: center; */
             color: var(--white);
         }
 
@@ -58,10 +60,6 @@
             border-radius: var(--button-radius);
         }
 
-        .input.error {
-            border-color: red;
-        }
-
         .btn {
             background-image: url('https://i.pinimg.com/originals/f5/f2/74/f5f27448c036af645c27467c789ad759.gif');
             color: var(--white);
@@ -74,6 +72,7 @@
             border-radius: var(--button-radius);
             width: 100%;
         }
+
 
         .btn:hover {
             background-color: var(--lightblue);
@@ -98,105 +97,60 @@
             text-decoration: none;
             align-self: flex-start;
         }
-
-        .error-message {
-            color: red;
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-        }
-        .input-group{
-            width: 357px;
-        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <a href="?act=trangchu" class="back-button">↩️Quay lại</a>
+        <a href="?act=trangchu" class="back-button">Quay lại</a>
 
         <h2>Đăng ký</h2>
-        <form id="signup-form" action="<?= BASE_URL . '?act=dangky' ?>" method="post">
-            <div class="input-group">
-                <input class="input" type="text" placeholder="Tên đăng nhập" name="username" id="ten_dang_nhap" />
-                <div id="username-error" class="error-message"></div>
-            </div>
+        <form action="<?= BASE_URL . '?act=dangky' ?>" method="post">
 
-            <div class="input-group">
-                <input class="input" type="email" placeholder="Email" name="email" id="email" />
-                <div id="email-error" class="error-message"></div>
-            </div>
-
-            <div class="input-group">
-                <input class="input" type="password" placeholder="Mật khẩu" name="password" id="mat_khau" />
-                <div id="password-error" class="error-message"></div>
-            </div>
+            <input class="input" type="text" placeholder="Tên đăng nhập" name="username" id="ten_dang_nhap" />
+            <input class="input" type="email" placeholder="Email" name="email" id="email" />
+            <input class="input" type="password" placeholder="Mật khẩu" name="password" id="mat_khau" />
 
             <button class="btn" type="submit">Đăng ký</button>
         </form>
 
         <a class="login-link" href="?act=login">Đã có tài khoản? Đăng nhập</a>
     </div>
-
-    
-
-    <script>
-        function validateSignUpForm(event) {
-            event.preventDefault(); // Prevent form submission to handle validation
-
-            // Clear previous error messages
-            document.getElementById('username-error').innerText = '';
-            document.getElementById('email-error').innerText = '';
-            document.getElementById('password-error').innerText = '';
-            document.getElementById('ten_dang_nhap').classList.remove('error');
-            document.getElementById('email').classList.remove('error');
-            document.getElementById('mat_khau').classList.remove('error');
-
-            var valid = true;
-
+    <!-- <script>
+        function validateSignUpForm() {
             var tenDangNhap = document.getElementById('ten_dang_nhap').value;
             var email = document.getElementById('email').value;
             var matKhau = document.getElementById('mat_khau').value;
 
             if (tenDangNhap.trim() === "") {
-                valid = false;
-                document.getElementById('username-error').innerText = "Tên đăng nhập không được để trống.";
-                document.getElementById('ten_dang_nhap').classList.add('error');
+                alert("Tên đăng nhập không được để trống.");
+                return false;
             }
 
             if (email.trim() === "") {
-                valid = false;
-                document.getElementById('email-error').innerText = "Email không được để trống.";
-                document.getElementById('email').classList.add('error');
-            } else {
-                var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-                if (!emailPattern.test(email)) {
-                    valid = false;
-                    document.getElementById('email-error').innerText = "Vui lòng nhập một địa chỉ email hợp lệ.";
-                    document.getElementById('email').classList.add('error');
-                }
+                alert("Email không được để trống.");
+                return false;
+            }
+
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailPattern.test(email)) {
+                alert("Vui lòng nhập một địa chỉ email hợp lệ.");
+                return false;
             }
 
             if (matKhau.trim() === "") {
-                valid = false;
-                document.getElementById('password-error').innerText = "Mật khẩu không được để trống.";
-                document.getElementById('mat_khau').classList.add('error');
+                alert("Mật khẩu không được để trống.");
+                return false;
             }
 
             if (matKhau.length < 6) {
-                valid = false;
-                document.getElementById('password-error').innerText = "Mật khẩu phải có ít nhất 6 ký tự.";
-                document.getElementById('mat_khau').classList.add('error');
+                alert("Mật khẩu phải có ít nhất 6 ký tự.");
+                return false;
             }
 
-            // If everything is valid, submit the form
-            if (valid) {
-                document.getElementById('signup-form').submit();
-            }
+            return true;
         }
-
-        // Attach the validation function to form submission
-        document.getElementById('signup-form').addEventListener('submit', validateSignUpForm);
-    </script>
+    </script> -->
 </body>
 
 </html>

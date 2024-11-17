@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,16 +58,8 @@
             padding: 0.9rem;
             margin: 0.5rem 0;
             width: 100%;
-            border-radius: 5%;
         }
 
-        .input.error {
-            border-color: red;
-        }
-
-            .input-group{
-                width: 357px;
-            }
         .btn {
             background-image: url('https://i.pinimg.com/originals/f5/f2/74/f5f27448c036af645c27467c789ad759.gif');
             color: var(--white);
@@ -94,70 +87,48 @@
             text-decoration: none;
             align-self: flex-start;
         }
-
-        .error-message {
-            color: red;
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-        }
-
     </style>
 </head>
 
 <body>
 
     <div class="container">
-        <a href="?act=trangchu" class="back-button">↩️Quay lại</a>
+        <a href="?act=trangchu" class="back-button">Quay lại</a>
         <h2>Đăng nhập</h2>
 
-        <form id="sign-in-form" action="<?= BASE_URL . '?act=dangnhap' ?>" method="post" onsubmit="return validateSignInForm(event)">
-            <div class="input-group">
-                <input class="input" type="text" placeholder="Tên đăng nhập" name="username" id="ten_dang_nhap" />
-                <div id="username-error" class="error-message"></div>
-            </div>
-
-            <div class="input-group">
-                <input class="input" type="password" placeholder="Mật khẩu" name="password" id="mat_khau" />
-                <div id="password-error" class="error-message"></div>
-            </div>
-
+        <form class="form" id="sign-in-form" action="<?= BASE_URL . '?act=dangnhap' ?>" method="post" onsubmit="return validateSignUpForm()">
+            <input class="input" type="text" placeholder="Tên đăng nhập" name="username" id="ten_dang_nhap"  />
+            <input class="input" type="password" placeholder="Password" name="password" id="mat_khau"  />
             <button class="btn" type="submit">Đăng nhập</button>
         </form>
 
+        <div id="error-message" style="color: red;"></div>
+
         <a href="?act=register" class="signup-link">Chưa có tài khoản? Đăng ký</a>
     </div>
-
     <script>
-        function validateSignInForm(event) {
-            event.preventDefault();
-
-            document.getElementById('username-error').innerText = '';
-            document.getElementById('password-error').innerText = '';
-            document.getElementById('ten_dang_nhap').classList.remove('error');
-            document.getElementById('mat_khau').classList.remove('error');
-
-            var valid = true;
+        function validateSignUpForm() {
             var tenDangNhap = document.getElementById('ten_dang_nhap').value;
             var matKhau = document.getElementById('mat_khau').value;
 
             if (tenDangNhap.trim() === "") {
-                valid = false;
-                document.getElementById('username-error').innerText = "Tên đăng nhập không được để trống.";
-                document.getElementById('ten_dang_nhap').classList.add('error');
+                alert("Tên đăng nhập không được để trống.");
+                return false;
             }
 
             if (matKhau.trim() === "") {
-                valid = false;
-                document.getElementById('password-error').innerText = "Mật khẩu không được để trống.";
-                document.getElementById('mat_khau').classList.add('error');
+                alert("Mật khẩu không được để trống.");
+                return false;
             }
 
-            if (valid) {
-                document.getElementById('sign-in-form').submit();
+            if (matKhau.length < 6) {
+                alert("Mật khẩu phải có ít nhất 6 ký tự.");
+                return false;
             }
+
+            return true;
         }
     </script>
-
 </body>
 
 </html>

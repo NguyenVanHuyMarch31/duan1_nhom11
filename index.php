@@ -9,12 +9,9 @@ $act = $_GET['act'] ?? '/';
 
 match ($act) {
     '/' => (new userController())->trangchu(),
-    
-    'trangchu'  => (new userController())->trangchu(),
-    'dangky'     => (new userController())->postRegister(),
-    'dangnhap'   => (new userController())->postLogin(),
-    'login'   => (new userController())->formLogin(),
-    'register'   => (new userController())->formRegister(),
-    
-
+    'trangchu' => (new userController())->trangchu(),
+    'dangky' => (new userController())->postRegister(),
+    'dangnhap' => (new userController())->postLogin(),
+    'login' => (new userController())->formLogin(),
+    'register' => (new userController())->formRegister(),
 };

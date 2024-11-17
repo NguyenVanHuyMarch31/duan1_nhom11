@@ -1,5 +1,8 @@
 <!doctype html>
-
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
 <html class="no-js" lang=""> <!--<![endif]-->
 
 <head>
@@ -70,18 +73,6 @@
         #cellPaiChart {
             height: 160px;
         }
-
-        .details-btn {
-            width: calc(2 * (50px + 5px) - 5px);
-        }
-
-        .btn-group a button {
-            min-width: 50px;
-        }
-
-        .span {
-            max-width: 50px
-        }
     </style>
 </head>
 
@@ -90,11 +81,11 @@
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav">
                     <li class="menu-item dropdown">
-                        <a href="<?php echo BASE_URL_ADMIN . '?act=quanTriTinTuc' ?>"> <i class="menu-icon fa fa-home"></i>Quản lý tin tức</a>
+                        <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"> <i class="menu-icon fa fa-home"></i>Quản lý tin tức</a>
                     </li>
-
+                    
                     <li class="menu-item dropdown">
                         <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-video-camera"></i>Quản lý phòng phim
                         </a>
@@ -108,7 +99,7 @@
                         <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-comments"></i>Quản lý bình luận
                         </a>
                     </li>
-
+                    
                     <li class="menu-item dropdown">
                         <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-laptop"></i>Quản lý suất chiếu
                         </a>
@@ -126,7 +117,7 @@
                     <li class="menu-item dropdown">
                         <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-users"></i>Quản lý tài khoản</a>
                     </li>
-
+                    
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -138,7 +129,7 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./"><img src="/duan1_Nhom11/images/logo2.png" alt="Logo" width="260px" height="40px"></a>
+                    <a class="navbar-brand" href="./"><img src="/duan1_Nhom11/images/logo2.png" alt="Logo" width="260px" height="40px" ></a>
                     <a class="navbar-brand hidden" href="./"><img src="/duan1_Nhom11/images/logo2.png" alt="Logo1" width="100px" height="40px"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
@@ -176,86 +167,117 @@
             </div>
         </header>
         <!-- /#header -->
-
         <!-- Content -->
         <div class="content">
             <!-- Animated -->
             <div class="animated fadeIn">
-                <h3>Quản lý tin tức</h3>
-                <div class="card-header">
-                    <a href="<?php echo BASE_URL_ADMIN . '?act=themTinTuc' ?>">
-                        <button class="btn btn-success">Thêm mới tin tức</button>
-                    </a>
-                </div>
+                <h3>Quản lí tin tức</h3>
+
                 <div class="table-stats order-table ov-h">
                     <table class="table">
-                        <thead>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tiêu đề</th>
+                            <th>Nội dung</th>
+                            <th>Ngày nhập</th>
+                            <th>Tác giả</th>
+                            <th>Hình ảnh</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($newsList as $key=>$newList){
+                            ?>
                             <tr>
-                                <th>#</th>
-                                <th>Tên Đăng Nhập</th>
-                                <th>Email</th>
-                                <th>Ngày Sinh</th>
-                                <th>Giới tính</th>
-                                <th style="width: 100px;">Hình ảnh</th>
-                                <th>Thao tác</th>
+                                <td><?= $key + 1 ?></td>
+                                <td><?= $newList['title'] ?></td>
+                                <td><?= $newList['content'] ?></td>
+                                <td><?= $newList['publish_date'] ?></td>
+                                <td><?= $newList['author'] ?></td>
+                                <td><?= $newList['thumbnail'] ?></td>
+                                <!-- <td><img src="<?= BASE_URL . $newList['thumbnali'] ?>" width="100px" height="100px" alt="" 
+                                onerror="this.onerror=null;this.src='https://i.pinimg.com/originals/d9/bb/0a/d9bb0acee9483e810062c9972dab6734.gif'"></td> -->
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="#">
+                                            <button class="btn btn-primary">Edit</button>
+                                        </a>
+                                        <a href="#">
+                                            <button class="btn btn-warning">Delete</button>
+                                        </a>
+                                        <a href="#">
+                                            <button class="btn btn-danger">Add</button>
+                                        </a>
+                                        <a href="#">
+                                            <button class="btn btn-info">Details</button>
+                                        </a>
+                                    </div>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($newsList as $key => $newList) { ?>
-                                <tr>
-                                    <td><?= $key + 1 ?></td>
-                                    <td><?= $newList['title'] ?></td>
-                                    <td><?= substr($newList['content'], 0, 100) ?>...</td>
-                                    <td><?= $newList['publish_date'] ?></td>
-                                    <td><?= $newList['author'] ?></td>
-                                    <td>
-                                        <img src="<?= BASE_URL . $newList['thumbnail'] ?>"
-                                            style="width: 100px;" alt="Thumbnail"
-                                            onerror="this.onerror=null; this.src='https://i.pinimg.com/474x/8b/ec/ad/8becad61ee85c3c02b460bddf5ba7905.jpg'">
-                                    </td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="<?= BASE_URL_ADMIN . '?act=suaTinTuc&news_id=' . $newList['news_id'] ?>"
-                                                class="btn btn-primary">Sửa</a>
-                                            <a href="<?= BASE_URL_ADMIN . '?act=deleteTinTuc&news_id=' . $newList['news_id'] ?>"
-                                                onclick="return confirm('Bạn có muốn xóa tin tức này không?')"
-                                                class="btn btn-warning">Xóa</a>
-                                            <a href="<?= BASE_URL_ADMIN . '?act=chiTietTinTuc&news_id=' . $newList['news_id'] ?>"
-                                                class="btn btn-info">Chi Tiết</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                </div>
+                            <?php
+                        }
+
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+
+                
             </div>
             <!-- .animated -->
         </div>
         <!-- /.content -->
         <div class="clearfix"></div>
-
         <!-- Footer -->
         <footer class="site-footer">
-            <div class="footer-inner bg-white">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h4>BEEFILMHUB</h4>
-                        <p>Cổng thông tin giải trí phim và trải nghiệm điện ảnh tốt nhất.</p>
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        <p>&copy; 2024 BEEFILMHUB</p>
-                        <p>Thiết kế bởi <a href="https://yourwebsite.com">Nhóm 11 - BFH</a></p>
-                    </div>
-                </div>
+    <div class="footer-inner bg-white">
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>BEEFILMHUB</h4>
+                <p>Cổng thông tin giải trí phim và trải nghiệm điện ảnh tốt nhất.</p>
             </div>
-        </footer>
+            <div class="col-sm-6 text-right">
+                <p>&copy; 2024 BEEFILMHUB</p>
+                <p>Thiết kế bởi <a href="https://yourwebsite.com">Nhóm 11 - BFH</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
 
         <!-- /.site-footer -->
     </div>
     <!-- /#right-panel -->
 
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="assets/js/main.js"></script>
 
+    <!--  Chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+
+    <!--Chartist Chart-->
+    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
+    <script src="assets/js/init/weather-init.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+    <script src="assets/js/init/fullcalendar-init.js"></script>
+
+    <!--Local Stuff-->
+    <script>
+        
+    </script>
 </body>
 
-</html>
+</html>                                                                                                                                                                    
