@@ -96,7 +96,7 @@
         <a href="?act=trangchu" class="back-button">Quay lại</a>
         <h2>Đăng nhập</h2>
 
-        <form class="form" id="sign-in-form" action="<?= BASE_URL . '?act=dangnhap' ?>" method="post" onsubmit="return validateSignUpForm()">
+        <form id="sign-in-form" action="<?= BASE_URL . '?act=dangnhap' ?>" method="post" onsubmit="return validateSignInForm(event)">
             <input class="input" type="text" placeholder="Tên đăng nhập" name="username" id="ten_dang_nhap"  />
             <input class="input" type="password" placeholder="Password" name="password" id="mat_khau"  />
             <button class="btn" type="submit">Đăng nhập</button>
