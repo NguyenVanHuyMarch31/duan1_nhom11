@@ -1,8 +1,5 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
+
 <html class="no-js" lang=""> <!--<![endif]-->
 
 <head>
@@ -83,7 +80,7 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="menu-item dropdown">
-                        <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"> <i class="menu-icon fa fa-home"></i>Quản lý tin tức</a>
+                        <a href="<?php echo BASE_URL_ADMIN . '?act=quanTriTinTuc' ?>"> <i class="menu-icon fa fa-home"></i>Quản lý tin tức</a>
                     </li>
 
                     <li class="menu-item dropdown">
@@ -173,16 +170,16 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Thêm Tin Tức</h3>
+                            <h3>Sửa Tin Tức</h3>
                         </div>
                         <div class="card-body card-block">
-                            <form action="<?php echo BASE_URL_ADMIN . '?act=postTinTuc'; ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
-
+                            <form action="<?php echo BASE_URL_ADMIN . '?act=editTintuc'; ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <input type="hidden" name="news_id" value="<?= $news['news_id'] ?>">
                                 <!-- Title -->
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="title" class="form-control-label">Tiêu đề</label></div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="title" name="title" placeholder="Viết tiêu đề vào đây" class="form-control" value="<?= $_POST['title'] ?? ''; ?>">
+                                        <input type="text" id="title" name="title" placeholder="Viết tiêu đề vào đây" class="form-control" value="<?= $news['title'] ?>">
                                         <?php if (isset($_SESSION['error']['title'])): ?>
                                             <p class="text-danger"><?= $_SESSION['error']['title'] ?></p>
                                         <?php endif; ?>
@@ -193,7 +190,7 @@
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="author" class="form-control-label">Tác giả</label></div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="author" name="author" placeholder="BeeFilmHub Team" class="form-control" value="<?= $_POST['author'] ?? ''; ?>">
+                                        <input type="text" id="author" name="author" placeholder="BeeFilmHub Team" class="form-control" value="<?= $news['author'] ?>">
                                         <?php if (isset($_SESSION['error']['author'])): ?>
                                             <p class="text-danger"><?= $_SESSION['error']['author'] ?></p>
                                         <?php endif; ?>
@@ -204,7 +201,7 @@
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="publish_date" class="form-control-label">Ngày nhập</label></div>
                                     <div class="col-12 col-md-9">
-                                        <input type="date" id="publish_date" name="publish_date" class="form-control" value="<?= $_POST['publish_date'] ?? ''; ?>">
+                                        <input type="date" id="publish_date" name="publish_date" class="form-control" value="<?= $news['publish_date'] ?>">
                                         <?php if (isset($_SESSION['error']['ngay_nhap'])): ?>
                                             <p class="text-danger"><?= $_SESSION['error']['ngay_nhap'] ?></p>
                                         <?php endif; ?>
@@ -226,12 +223,13 @@
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="content" class="form-control-label">Nội dung</label></div>
                                     <div class="col-12 col-md-9">
-                                        <textarea name="content" id="content" rows="9" placeholder="Nội dung ....." class="form-control"><?= $_POST['content'] ?? ''; ?></textarea>
+                                        <textarea name="content" id="content" rows="9" placeholder="Nội dung ..." class="form-control"><?= $news['content'] ?></textarea>
                                         <?php if (isset($_SESSION['error']['content'])): ?>
                                             <p class="text-danger"><?= $_SESSION['error']['content'] ?></p>
                                         <?php endif; ?>
                                     </div>
                                 </div>
+
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary btn-sm">
@@ -261,35 +259,68 @@
 
         <!-- /#right-panel -->
 
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-        <script src="assets/js/main.js"></script>
-
-        <!--  Chart js -->
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
-
-        <!--Chartist Chart-->
-        <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
-
-        <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
-
-        <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
-        <script src="assets/js/init/weather-init.js"></script>
-
-        <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-        <script src="assets/js/init/fullcalendar-init.js"></script>
-
-        <!--Local Stuff-->
+        <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
         <script>
-
+            // Khởi tạo TinyMCE
+            tinymce.init({
+                selector: '#content', // Chỉ định textarea sẽ được chuyển thành trình soạn thảo
+                plugins: 'lists link image', // Các plugin cho danh sách, liên kết, hình ảnh
+                toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link image', // Các công cụ trên thanh công cụ
+                menubar: false, // Ẩn menu bar
+                height: 300, // Chiều cao của trình soạn thảo
+            });
         </script>
+        <!-- Place the first <script> tag in your HTML's <head> -->
+        <script src="https://cdn.tiny.cloud/1/bdelgtu5e4fd8c8fh1d8qj13x8qshrbjhjpbus6d3vo6gu6m/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+        <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+        <script>
+            tinymce.init({
+                selector: 'textarea',
+                plugins: [
+                    // Core editing features
+                    'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+                    // Your account includes a free trial of TinyMCE premium features
+                    // Try the most popular premium features until Dec 1, 2024:
+                    'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown',
+                    // Early access to document converters
+                    'importword', 'exportword', 'exportpdf'
+                ],
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                tinycomments_mode: 'embedded',
+                tinycomments_author: 'Author name',
+                mergetags_list: [{
+                        value: 'First.Name',
+                        title: 'First Name'
+                    },
+                    {
+                        value: 'Email',
+                        title: 'Email'
+                    },
+                ],
+                ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+                exportpdf_converter_options: {
+                    'format': 'Letter',
+                    'margin_top': '1in',
+                    'margin_right': '1in',
+                    'margin_bottom': '1in',
+                    'margin_left': '1in'
+                },
+                exportword_converter_options: {
+                    'document': {
+                        'size': 'Letter'
+                    }
+                },
+                importword_converter_options: {
+                    'formatting': {
+                        'styles': 'inline',
+                        'resets': 'inline',
+                        'defaults': 'inline',
+                    }
+                },
+            });
+        </script>
+
 </body>
 
 </html>

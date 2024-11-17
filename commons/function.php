@@ -43,13 +43,14 @@ function uploadFile($file, $folderUpload) {
     return null; 
 }
 
-function deleteFile($file) {
-    $pathDelete = PATH_ROOT . $file;
-
-    if (file_exists($pathDelete)) {
-        unlink($pathDelete);
+function deleteFile($fileName)
+{
+    $filePath = './uploads/' . $fileName;
+    if (file_exists($filePath)) {
+        unlink($filePath);
     }
 }
+
 
 
 function deleteSessionError() {

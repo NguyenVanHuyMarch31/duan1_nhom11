@@ -21,6 +21,10 @@ match ($act) {
     'postTinTuc' => (new quanTriTinTucController())->postTinTuc(),
     'deleteTinTuc' => (new quanTriTinTucController())->deleteTinTuc(),
     'suaTinTuc' => (new quanTriTinTucController())->suaTinTuc(),
+    'editTintuc' => (new quanTriTinTucController())->editTintuc(),
+    'chiTietTinTuc' => (new quanTriTinTucController())->chiTietTinTuc(),
+
+
 
 
 };
