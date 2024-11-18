@@ -7,9 +7,8 @@ class quanTriTaiKhoanController {
         $this->modelTaiKhoan = new quanTriTaiKhoanModel();
     }
 
-    public function danhSachTaiKhoan()
+    public function quanTriTaiKhoan()
     {
-        $listTaiKhoan = $this->modelTaiKhoan->getAllTaiKhoan();
             require_once './views/quanLiTaiKhoan/adminQuanLiThongTin.php';
         }        
     }
