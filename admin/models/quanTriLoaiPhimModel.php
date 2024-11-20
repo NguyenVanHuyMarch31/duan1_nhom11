@@ -1,5 +1,5 @@
 <?php
-class modelGenreMovies
+class quanTriLoaiPhimModel
 {
     public $conn;
 

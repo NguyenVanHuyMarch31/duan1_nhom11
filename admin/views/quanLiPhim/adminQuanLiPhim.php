@@ -1,288 +1,120 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang=""> <!--<![endif]-->
+<?php require './views/layout/header.php'; ?>
+<?php require './views/layout/sidebar.php'; ?>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>HHC - BFH Bee Film Hub</title>
-    <meta name="description" content="Ela Admin - Mẫu quản trị HTML5">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
-
-    <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
-
-    <style>
-        @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
-
-        #weatherWidget .currentDesc {
-            color: #ffffff !important;
-        }
-
-        .traffic-chart {
-            min-height: 335px;
-        }
-
-        #flotPie1 {
-            height: 150px;
-        }
-
-        #flotPie1 td {
-            padding: 3px;
-        }
-
-        #flotPie1 table {
-            top: 20px !important;
-            right: -10px !important;
-        }
-
-        .chart-container {
-            display: table;
-            min-width: 270px;
-            text-align: left;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-
-        #flotLine5 {
-            height: 105px;
-        }
-
-        #flotBarChart {
-            height: 150px;
-        }
-
-        #cellPaiChart {
-            height: 160px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: rgba(235, 195, 52, 0.2);
-        }
-
-        .container {
-            margin: 0 auto;
-            max-width: 1300px;
-            padding: 30px 20px;
-            padding-top: 60px;
-        }
-
-        .container .center {
-            text-align: center;
-        }
-
-        .center h1 {
-            font-size: 36px;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-
-        .our-team-text {
-            margin: 0 auto;
-            max-width: 700px;
-            line-height: 1.8;
-            color: #888;
-            margin-bottom: 40px;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap: 30px;
-        }
-
-        .card {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .card img {
-            height: 100px;
-            width: 100px;
-            object-fit: cover;
-            border-radius: 1%;
-            margin-bottom: 30px;
-        }
-
-        .card .card-name {
-            margin-bottom: 10px;
-            font-weight: 500;
-            font-size: 24px;
-        }
-
-        .card .card-text {
-            font-size: 16px;
-            color: #888;
-            margin-bottom: 40px;
-        }
-
-        .card .btn {
-            padding: 15px 60px;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-            border-radius: 50px;
-            text-decoration: none;
-            color: #000;
-            transition: 0.3s ease;
-        }
-
-        .card .btn:hover {
-            box-shadow: -2px -2px rgba(0, 0, 0, 0.3);
-            transform: translateY(-5px);
-        }
-
-        @media screen and (max-width: 700px) {
-            .cards {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <!-- Thanh bên trái -->
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="menu-item dropdown">
-                        <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"> <i class="menu-icon fa fa-home"></i>Quản lý tin tức</a>
-                    </li>
-                    
-                    <li class="menu-item dropdown">
-                        <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-video-camera"></i>Quản lý phòng phim
-                        </a>
-                    </li>
-
-                    <li class="menu-item dropdown">
-                        <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-shopping-cart"></i>Quản lý danh sách đặt vé
-                        </a>
-                    </li>
-                    <li class="menu-item dropdown">
-                        <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-comments"></i>Quản lý bình luận
-                        </a>
-                    </li>
-                    
-                    <li class="menu-item dropdown">
-                        <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-laptop"></i>Quản lý suất chiếu
-                        </a>
-                    </li>
-                    <li class="menu-item dropdown">
-                        <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-bar-chart-o"></i>Thống kê </a>
-                    </li>
-                    <li class="menu-item dropdown">
-                        <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-film"></i>Quản lý phim
-                        </a>
-                    </li>
-                    <li class="menu-item dropdown">
-                        <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-sitemap"></i>Quản lý thể loại phim</a>
-                    </li>
-                    <li class="menu-item dropdown">
-                        <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-users"></i>Quản lý tài khoản</a>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside>
-    <!-- /#left-panel -->
-
-    <!-- Thanh bên phải -->
-    <div id="right-panel" class="right-panel">
-        <!-- Header-->
-        <header id="header" class="header">
-            <div class="top-left">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="./"><img src="https://scontent.fhan14-1.fna.fbcdn.net/v/t1.15752-9/462568801_601351862462540_8090446170272868322_n.png?_nc_cat=101&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeG3WeBtPV6KnC_8c9sG66zt_btnVtBznh79u2dW0HOeHvmWv3csFmmqauUGviv9bo7QPUc9mlUJGw54c9G1bdh9&_nc_ohc=L-xGH3BEF_IQ7kNvgGRcio7&_nc_zt=23&_nc_ht=scontent.fhan14-1.fna&_nc_gid=AWe5PMv4-06Hq-5DfwJPpNn&oh=03_Q7cD1QFTZGnONi4PVUdgmUhAPSU2y5gzq7RjqxIVBpg8MZ_Xiw&oe=674F1083" alt="Logo" width="260px" height="40px"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="https://scontent.fhan14-1.fna.fbcdn.net/v/t1.15752-9/462568801_601351862462540_8090446170272868322_n.png?_nc_cat=101&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeG3WeBtPV6KnC_8c9sG66zt_btnVtBznh79u2dW0HOeHvmWv3csFmmqauUGviv9bo7QPUc9mlUJGw54c9G1bdh9&_nc_ohc=L-xGH3BEF_IQ7kNvgGRcio7&_nc_zt=23&_nc_ht=scontent.fhan14-1.fna&_nc_gid=AWe5PMv4-06Hq-5DfwJPpNn&oh=03_Q7cD1QFTZGnONi4PVUdgmUhAPSU2y5gzq7RjqxIVBpg8MZ_Xiw&oe=674F1083" alt="Logo1" width="100px" height="40px"></a>
-                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
-                </div>
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+    <?php require './views/layout/navbar.php'; ?>
+    <!-- Content -->
+    <div class="content">
+        <!-- Animated -->
+        <div class="animated fadeIn">
+            <h1>Danh Sách Phim - Bee Film Hub</h1>
+            <div class="card-header">
+                <a href="<?= BASE_URL_ADMIN . '?act=themPhim' ?>">
+                    <button class="btn btn-success">Thêm mới phim</button>
+                </a>
             </div>
-            <div class="top-right">
-                <div class="header-menu">
-                    <div class="header-left">
-                        <button class="search-trigger"><i class="fa fa-search"></i></button>
-                        <div class="form-inline">
-                            <form class="search-form">
-                                <input class="form-control mr-sm-2" type="text" placeholder="Tìm kiếm ..." aria-label="Search">
-                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
-                            </form>
-                        </div>
-                    </div>
 
-                    <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="https://scontent.fhan14-4.fna.fbcdn.net/v/t1.15752-9/462558354_1768316567240669_1874724754795816513_n.png?_nc_cat=102&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeFKatYpLC-mS9rmFWYdUml60b_kpkPa_hfRv-SmQ9r-Fz-mK9Ug3vjPxcJxSnImqkuXcqskshwn8HY7fXalXfLr&_nc_ohc=ZBokyfpwEUYQ7kNvgHtuAE1&_nc_zt=23&_nc_ht=scontent.fhan14-4.fna&_nc_gid=Am6VL5KmYlPsQH4HlfcCiIg&oh=03_Q7cD1QEvX6wqCLEK9yJyAwY6T9bot6jM_goJffd4MdE61OqFmw&oe=674F0EAA" alt="Hình đại diện người dùng">
-                        </a>
+            <div class="table-stats order-table ov-h">
+                <?php if (!empty($listMovies) && is_array($listMovies)) { ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tên phim</th>
+                                <th>Thời lượng</th>
+                                <!-- <th>Đạo diễn</th>
+                                <th>Diễn viên</th>
+                                <th>Ngày phát hành</th> -->
+                                <th>Poster</th>
+                                <th>Trailer</th>
+                                <th>Thể loại</th>
+                                <th>Mô tả</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($listMovies as $index => $movie) { ?>
+                                <tr>
+                                    <td><?= $index + 1 ?></td>
+                                    <td><?= $movie['movie_name'] ?></td>
+                                    <td><?= $movie['duration'] ?> phút</td>
+                                    <!-- <td><?= $movie['director'] ?></td>
+                                    <td><?= $movie['actors'] ?></td>
+                                    <td><?= $movie['release_date'] ?></td> -->
 
-                        <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i>Thông tin tài khoản</a>
-                            <a class="nav-link" href="#"><i class="fa fa-cog"></i>Cài đặt</a>
-                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i>Đăng xuất</a>
-                        </div>
-                    </div>
-                </div>
+                                    <!-- Hiển thị Poster -->
+                                    <td>
+                                        <img src="<?= BASE_URL . $movie['poster'] ?>" style="width: 100px;" alt="Poster"
+                                            onerror="this.onerror=null; this.src='https://i.pinimg.com/236x/02/02/3e/02023ee1ee6d1a463eff69caf78e6322.jpg'">
+                                    </td>
+                                    <!-- Hiển thị Trailer -->
+                                    <td>
+                                        <a href="javascript:void(0)" onclick="openVideo('<?= $movie['trailer'] ?>')">Xem Trailer</a>
+                                    </td>
+                                    <!-- Hiển thị thể loại -->
+                                    <td><?= $movie['genres'] ?></td>
+
+                                    <!-- Mô tả phim cắt ngắn -->
+                                    <td title="<?= $movie['description'] ?>">
+                                        <?= substr($movie['description'], 0, 100) ?>
+                                    </td>
+                                    <!-- Các thao tác: Sửa, Xóa, Chi tiết -->
+                                    <td>
+                                        <div class="btn-group">
+                                            <!-- Sửa phim -->
+                                            <a href="<?= BASE_URL_ADMIN . '?act=suaPhim&movie_id=' . $movie['movie_id'] ?>" class="btn btn-primary" title="Sửa">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                            <!-- Xóa phim -->
+                                            <a href="<?= BASE_URL_ADMIN . '?act=deletePhim&movie_id=' . $movie['movie_id'] ?>" onclick="return confirm('Bạn có muốn xóa phim này không?')" class="btn btn-danger" title="Xóa">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                            <!-- Chi tiết phim -->
+                                            <a href="<?= BASE_URL_ADMIN . '?act=chiTietPhim&movie_id=' . $movie['movie_id'] ?>" class="btn btn-info" title="Chi tiết">
+                                                <i class="fa fa-info-circle"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+
+                        </tbody>
+                    </table>
+                <?php } else { ?>
+                    <p class="text-center">Chưa có phim nào được thêm!</p>
+                <?php } ?>
             </div>
-        </header>
-        <!-- /header -->
 
-        <div class="content mt-3">
-            <div class="animated fadeIn">
+        </div>
+        <!-- .animated -->
+    </div>
+    <!-- /.content -->
+    <div class="clearfix"></div>
+    <div id="videoPopup" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 800px; background-color: #000; padding: 20px; z-index: 1000;">
+        <iframe id="videoFrame" width="100%" height="450" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <button onclick="closeVideo()" style="position: absolute; top: 10px; right: 10px; background-color: #fff; border: none; font-size: 18px;">X</button>
+    </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
 
-                           
-                        </div>
-                    </div>
-                </div>
-            </div><!-- .animated -->
-        </div><!-- .content -->
 
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="footer-wrap">
-                            <p class="text-center">© 2024 HHC - BFH Bee Film Hub</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div><!-- /#right-panel -->
+    <div id="overlay" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 999;"></div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/main.js"></script>
-</body>
+    <script>
+        function openVideo(trailerUrl) {
+            // Sử dụng URL embed đúng định dạng
+            var embedUrl = trailerUrl.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/", "https://www.youtube.com/");
+            document.getElementById('videoFrame').src = embedUrl + "?autoplay=1";
+            document.getElementById('videoPopup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
 
-</html>
+
+        function closeVideo() {
+            document.getElementById('videoPopup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('videoFrame').src = ''; // Stop video when closing
+        }
+    </script>
+    <?php require './views/layout/footer.php'; ?>
+</div>

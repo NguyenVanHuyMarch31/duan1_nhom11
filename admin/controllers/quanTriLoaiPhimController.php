@@ -1,12 +1,10 @@
 <?php
 class quanTriLoaiPhimController
 {   
-    // public $modelGenre_Movies;
     public $modelGenreMovies;
     public function __construct()
     {
-        // $this->modelGenre_Movies = new modelGenre_Movies();
-        $this->modelGenreMovies = new modelGenreMovies();
+        $this->modelGenreMovies = new quanTriLoaiPhimModel();
     }
 
     public function quanTriLoaiPhim()

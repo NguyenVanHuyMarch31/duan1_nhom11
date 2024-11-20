@@ -29,7 +29,7 @@
                         <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-bar-chart-o"></i>Thống kê </a>
                     </li>
                     <li class="menu-item dropdown">
-                        <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-film"></i>Quản lý phim
+                        <a href="<?php echo BASE_URL_ADMIN . '?act=quanTriPhim' ?>"><i class="menu-icon fa fa-film"></i>Quản lý phim
                         </a>
                     </li>
                     <li class="menu-item dropdown">
