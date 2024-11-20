@@ -7,6 +7,8 @@ require_once './controllers/yourController.php';
 require_once './controllers/quanTriTinTucController.php';
 require_once './controllers/quanTriLoaiPhimController.php';
 require_once './controllers/quanTriPhimController.php';
+require_once './controllers/quanTriGheController.php';
+
 
 
 // Model
@@ -15,6 +17,8 @@ require_once './models/yourModel.php';
 require_once './models/quanTriTinTucModel.php';
 require_once './models/quanTriLoaiPhimModel.php';
 require_once './models/quanTriPhimModel.php';
+require_once './models/quanTriGheModel.php';
+
 
 
 $act = $_GET['act'] ?? '/';
@@ -47,6 +51,14 @@ match ($act) {
     'suaPhim' => (new quanTriPhimController())->suaPhim(),
     'editPhim' => (new quanTriPhimController())->editPhim(),
     'chiTietPhim' => (new quanTriPhimController())->chiTietPhim(),
+
+    'quanTriGhe' => (new quanTriGheController())->quanTriGhe(),
+    'themGhe' => (new quanTriGheController())->themGhe(),
+    'postGhe' => (new quanTriGheController())->postGhe(),
+    'deleteGhe' => (new quanTriGheController())->deleteGhe(),
+    'suaGhe' => (new quanTriGheController())->suaGhe(),
+    'editGhe' => (new quanTriGheController())->editGhe(),
+    'chiTietGhe' => (new quanTriGheController())->chiTietGhe(),
 
 
 
