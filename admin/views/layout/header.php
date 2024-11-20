@@ -1,9 +1,5 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang=""> <!--<![endif]-->
+<html class="no-js" lang="">
 
 <head>
     <meta charset="utf-8">
@@ -164,7 +160,163 @@
                 grid-template-columns: 1fr;
             }
         }
-    </style>
-</head>
 
-<body>
+        .movie-details-container {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-title {
+            font-size: 2rem;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .movie-info {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .movie-info-left {
+            width: 40%;
+        }
+
+        .movie-info-right {
+            width: 55%;
+        }
+
+        .poster-img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .movie-details-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .movie-info-left {
+            flex: 1;
+            padding-right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .movie-poster {
+            position: relative;
+            cursor: pointer;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .poster-img {
+            transition: transform 0.3s ease, filter 0.3s ease;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .movie-poster:hover .poster-img {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .movie-description {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            text-align: justify;
+        }
+
+        .movie-description h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .movie-info-right {
+            flex: 1;
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 800px;
+        }
+
+        .movie-info-right p {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .movie-info-right strong {
+            color: #333;
+        }
+
+        .btn.btn-trailer {
+            color: #007bff;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .btn.btn-trailer:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        #videoPopup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 800px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 9999;
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 9998;
+        }
+
+        .popup-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: #333;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+
+</head>

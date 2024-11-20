@@ -27,7 +27,7 @@ class quanTriPhimController
         require_once './views/quanLiPhim/themPhim.php';
     }
 
-    
+
     public function postPhim()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -95,25 +95,27 @@ class quanTriPhimController
             exit();
         }
     }
-    public function suaPhim() {
-        $movie_id = $_GET['movie_id'];  
-        if($movie_id) {
+    public function suaPhim()
+    {
+        $movie_id = $_GET['movie_id'];
+        if ($movie_id) {
             $movie = $this->modelMovies->getMovieById($movie_id);
-            $listGenreMovies = $this->modelGenreMovies->listGenreMovies(); 
-            $selectedGenres = $this->modelMovies->getGenresByMovieId($movie_id);  
-    
-            if($movie) {
+            $listGenreMovies = $this->modelGenreMovies->listGenreMovies();
+            $selectedGenres = $this->modelMovies->getGenresByMovieId($movie_id);
+
+            if ($movie) {
                 require_once './views/quanLiPhim/suaPhim.php';
             } else {
-                header('Location: '. BASE_URL_ADMIN. '?act=quanTriPhim');
+                header('Location: ' . BASE_URL_ADMIN . '?act=quanTriPhim');
                 exit();
             }
         }
     }
-    
-    
 
-    public function editPhim() {
+
+
+    public function editPhim()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $movie_id = $_POST['movie_id'];
             $movie_name = $_POST['movie_name'];
@@ -124,14 +126,13 @@ class quanTriPhimController
             $actors = $_POST['actors'];
             $release_date = $_POST['release_date'];
             $trailer = $_POST['trailer'];
-            $poster = $_FILES['poster'];
-    
+
             $errors = [];
-    
+
             if (empty($movie_name)) {
                 $errors['movie_name'] = "Tên phim không được để trống.";
             }
-    
+
             if (empty($duration)) {
                 $errors['duration'] = "Thời lượng không được để trống.";
             }
@@ -147,44 +148,78 @@ class quanTriPhimController
             if (empty($trailer)) {
                 $error['trailer'] = 'Link trailer phim không được để trống';
             }
-    
-            
-    
-            if ($poster['error'] == 0) {
-                $poster_name = $poster['name'];
-                $poster_tmp = $poster['tmp_name'];
-                $poster_path = './uploads/' . $poster_name;
-                move_uploaded_file($poster_tmp, $poster_path);
-            } else {
-                $poster_name = null; 
+            $existingNews = $this->modelMovies->getMovieById($movie_id);
+            if (!$existingNews) {
+                header("Location:" . BASE_URL_ADMIN . '?act=quanTriPhim');
+                exit();
             }
-    
+            $file_old = $existingNews['poster'] ?? null;
+            $file_new = $file_old;
+            // $poster = $_FILES['poster'];
+            if (isset($_FILES['poster']) && $_FILES['poster']['error'] == UPLOAD_ERR_OK) {
+                $poster = $_FILES['poster']; 
+
+                $new_file = uploadFile($poster, './uploads/');
+                if ($new_file) {
+                    $file_new = $new_file; 
+
+                    if ($file_old) {
+                        deleteFile($file_old);
+                    }
+                } else {
+                    $error['poster'] = 'Có lỗi khi tải lên ảnh mới.';
+                }
+            }
+
+
             if (empty($errors)) {
-                $updated = $this->modelMovies->updateMovie($movie_id, $movie_name, $genre_id, $duration, $description, $director, $actors, $release_date, $trailer, $poster_name);
-    
+                $updated = $this->modelMovies->updateMovie($movie_id, $movie_name, $genre_id, $duration, $description, $director, $actors, $release_date, $trailer, $file_new);
+
                 if (!empty($genre_id)) {
                     $this->modelMovies->updateMovieGenres($movie_id, $genre_id);
                 }
-    
+
                 if ($updated) {
                     header('Location: ' . BASE_URL_ADMIN . '?act=quanTriPhim');
                     exit();
                 } else {
+
                     $errors['update'] = "Có lỗi khi cập nhật phim.";
                 }
             }
-    
+
             $_SESSION['error'] = $errors;
             header('Location: ' . BASE_URL_ADMIN . '?act=suaPhim&movie_id=' . $movie_id);
             exit();
         }
     }
-    
-    public function deletePhim() {
 
+    public function deletePhim() {
+        $movie_id = $_GET['movie_id'];
+        $movies = $this->modelMovies->deleteMovie($movie_id);
+        header('Location: ' . BASE_URL_ADMIN . '?act=quanTriPhim');
+        exit();
     }
 
     public function chiTietPhim() {
+        $movie_id = $_GET['movie_id'];
+        if ($movie_id) {
+            // Retrieve movie details by ID
+            $movie = $this->modelMovies->getMovieById($movie_id);
 
+            if ($movie) {
+                $movie_genres = $this->modelMovies->getMovieGenres($movie_id);
+
+                require_once './views/quanLiPhim/chiTietPhim.php';
+            } else {
+                $_SESSION['error'] = "Phim không tồn tại.";
+                header('Location: ' . BASE_URL_ADMIN . '?act=quanTriPhim');
+                exit();
+            }
+        } else {
+            $_SESSION['error'] = "Không có ID phim được cung cấp.";
+            header('Location: ' . BASE_URL_ADMIN . '?act=quanTriPhim');
+            exit();
+        }
     }
 }
