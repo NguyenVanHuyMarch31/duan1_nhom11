@@ -14,8 +14,8 @@
                     <button class="btn btn-success">Thêm mới tin tức</button>
                 </a>
             </div>
-            <div class="table-stats order-table ov-h">
-                <table class="table">
+            <div class="card-body">
+                <table class="table" id="newsTable">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -29,7 +29,7 @@
                     </thead>
                     <tbody>
                         <?php foreach ($newsList as $key => $newList) { ?>
-                            <tr>
+                            <tr class="newsRow">
                                 <td><?= $key + 1 ?></td>
                                 <td><?= $newList['title'] ?></td>
                                 <td><?= substr($newList['content'], 0, 100) ?>...</td>
@@ -50,13 +50,18 @@
                         <?php } ?>
                     </tbody>
                 </table>
+
+                <!-- Phân trang -->
+                <nav class="paginationNav">
+                    <ul class="pagination justify-content-center">
+                        <!-- Nút phân trang sẽ được thêm vào đây qua JavaScript -->
+                    </ul>
+                </nav>
             </div>
-
-
-
         </div>
         <!-- .animated -->
     </div>
     <!-- /.content -->
     <div class="clearfix"></div>
-    <?php require './views/layout/footer.php' ?>
+</div>
+<?php require './views/layout/footer.php' ?>

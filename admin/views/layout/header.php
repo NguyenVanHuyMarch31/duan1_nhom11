@@ -317,6 +317,529 @@
             border: none;
             cursor: pointer;
         }
+
+        /* Cải thiện giao diện bảng */
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #495057;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f8f9fa;
+            color: #007bff;
+        }
+
+        .table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Nút nhóm */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Nút chính (Sửa và Xóa) */
+        .btn {
+            padding: 8px 15px;
+            font-size: 14px;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: #fff;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        /* Tiêu đề phòng */
+        h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Chỉnh sửa không gian */
+        .content {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Cải thiện layout */
+        .table-stats {
+            margin-top: 20px;
+        }
+
+        hr {
+            border: 0;
+            height: 5px;
+            background-image: url('https://i.pinimg.com/originals/89/8a/14/898a14d06c6c0bf27b8ceaf749cecb4c.gif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 20px 0;
+        }
+
+        /* Form Container */
+        .card-body {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Labels */
+        .form-control-label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Inputs */
+        .form-control,
+        .form-control-file {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Checkboxes */
+        .form-check-label {
+            font-size: 14px;
+            margin-left: 5px;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-danger:hover {
+            background-color: #a71d2a;
+        }
+
+        /* Error Messages */
+        .text-danger {
+            font-size: 12px;
+            color: #dc3545;
+        }
+
+        .error-messages p {
+            color: #dc3545;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Card Header */
+        .card-header h3 {
+            font-size: 20px;
+            color: #007bff;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Checkbox Container */
+        .checkbox {
+            margin-bottom: 10px;
+        }
+
+        .seat-container {
+            display: grid;
+            grid-template-columns: repeat(10, 60px);
+            gap: 10px;
+            justify-content: center;
+            margin-top: 30px;
+            margin-left: 40px;
+        }
+
+        .seat {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .seat input[type="checkbox"] {
+            display: none;
+        }
+
+        .seat label {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+        }
+
+        .seat input[type="checkbox"]:checked+label {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        /* Màu sắc theo loại ghế */
+        .seat.regular label {
+            background-color: #ddd;
+        }
+
+        .seat.vip label {
+            background-color: #FFD700;
+        }
+
+        .seat.premium label {
+            background-color: #87CEEB;
+        }
+
+        /* Pop-up thông tin ghế */
+        .seat-info-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 300px;
+        }
+
+        .seat-info-popup h4 {
+            margin-top: 0;
+        }
+
+        .seat-info-popup button {
+            margin: 5px;
+            padding: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .seat-info-popup button:hover {
+            background-color: #45a049;
+        }
+
+
+        .seat-info-popup {
+            display: none;
+            position: absolute;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* Trạng thái ghế */
+        .seat.maintain {
+            background-color: #6c757d;
+            /* Màu xám */
+            cursor: not-allowed;
+        }
+
+        .seat.selected {
+            background-color: #28a745;
+            /* Màu xanh lá */
+        }
+
+        .seat.not-selected {
+            background-color: #dc3545;
+            /* Màu đỏ */
+        }
+
+        /* Loại ghế */
+        .seat.gray {
+            background-color: #adb5bd;
+            /* Màu xám nhạt */
+        }
+
+        .seat.green {
+            background-color: #20c997;
+            /* Màu xanh mint */
+        }
+
+        .seat.gold {
+            background-color: #ffc107;
+            /* Màu vàng sáng */
+        }
+
+        .seat.unknown {
+            background-color: #6f42c1;
+            /* Màu tím */
+        }
+
+        .comment {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .comment .btn {
+            margin-right: 10px;
+        }
+
+        .comment-date {
+            color: gray;
+            font-size: 12px;
+        }
+
+        .comment-form {
+            margin-bottom: 30px;
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .account-detail {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .account-detail p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .account-detail h4 {
+            font-size: 20px;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .account-detail ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .account-detail ul li {
+            background-color: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .account-detail figure {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .account-detail figure img {
+            width: 150px;
+            height: 150px;
+            /* border-radius: 50%; */
+            border: 3px solid #ccc;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .account-detail .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .account-detail .btn:hover {
+            background-color: #0056b3;
+            cursor: pointer;
+        }
+
+        .site-footer {
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .news-article {
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .news-article p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .news-article p strong {
+            color: #007bff;
+        }
+
+        .news-article figure {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .news-article figure img {
+            width: 320px;
+            height: 320px;
+            /* border-radius: 50%; */
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-article .badge {
+            font-size: 14px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin-right: 5px;
+        }
+
+        .status {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: black;
+            width: 125px;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .status-da-ket-thuc {
+            background-color: #dc3545;
+            /* Màu đỏ */
+        }
+
+        .status-sap-chieu {
+            background-color: #ffc107;
+            /* Màu vàng */
+            color: black;
+            /* Màu chữ cho trạng thái vàng */
+        }
+
+        .status-dang-chieu {
+            background-color: #28a745;
+            /* Màu xanh lá */
+        }
+
+        .form-container {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group input[type="datetime-local"] {
+            padding: 8px;
+        }
+
+        .form-group button {
+            display: inline-block;
+            background: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-group button:hover {
+            background: #0056b3;
+        }
+        
     </style>
 
 </head>

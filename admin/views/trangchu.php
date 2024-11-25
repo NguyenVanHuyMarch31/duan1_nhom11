@@ -40,7 +40,7 @@
 
                                     <div class="card">
                                         <img src="https://i.pinimg.com/originals/2f/43/40/2f4340e2ac66f664d0551096e63e493a.gif" alt="anh3">
-                                        <h3 class="card-name">Đỗ Việt Hòa</h3>
+                                        <h3 class="card-name">###</h3>
                                         <p class="card-text">Sinh viên Fpoly</p>
                                         <a href="#" class="btn">Xem chi tiết</a>
                                     </div>

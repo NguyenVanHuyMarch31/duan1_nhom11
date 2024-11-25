@@ -6,7 +6,6 @@
     <?php require './views/layout/navbar.php' ?>
     <!-- Content -->
     <div class="content">
-        <!-- Animated -->
         <div class="animated fadeIn">
             <h3>Quản lí loại phim</h3>
             <div class="card-header">
@@ -15,7 +14,7 @@
                 </a>
             </div>
 
-            <div class="table-stats order-table ov-h">
+            <div class="card-body">
                 <?php if (!empty($listGenreMovies) && is_array($listGenreMovies)) { ?>
                     <table class="table">
                         <thead>

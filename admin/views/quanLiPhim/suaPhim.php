@@ -42,12 +42,11 @@
                                                         value="<?= $genre_movie['genre_id']; ?>"
                                                         class="form-check-input"
                                                         <?php
-                                                        // Kiểm tra xem genre_id có trong mảng $selectedGenres không
                                                         if (isset($selectedGenres) && in_array($genre_movie['genre_id'], $selectedGenres)) {
-                                                            echo 'checked';  // Nếu có thì đánh dấu checked
+                                                            echo 'checked';  
                                                         }
                                                         ?>>
-                                                    <?= $genre_movie['genre_name']; ?> <!-- Hiển thị tên thể loại -->
+                                                    <?= $genre_movie['genre_name']; ?> 
                                                 </label>
                                             </div>
                                         <?php } ?>
@@ -152,8 +151,10 @@
                                 <?php unset($_SESSION['error']); ?>
                             </div>
                         <?php endif; ?>
+                        
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>

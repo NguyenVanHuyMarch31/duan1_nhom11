@@ -40,6 +40,33 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Quản lý suất chiếu -->
+            <!-- Bình luận -->
+<div class="movie-comments">
+    <h2>Bình luận về phim</h2>
+    <div class="comments-list">
+        <h3>Bình luận đã có</h3>
+        <div class="comment">
+            <p><strong>Nguyễn Văn A:</strong> Đây là bình luận của người dùng A.</p>
+            <p class="comment-date">2024-11-21 10:00</p>
+            <button class="btn btn-warning">Sửa</button>
+            <button class="btn btn-danger">Xóa</button>
+        </div>
+        <div class="comment">
+            <p><strong>Trần Thị B:</strong> Bình luận của người dùng B rất thú vị.</p>
+            <p class="comment-date">2024-11-20 14:30</p>
+            <button class="btn btn-warning">Sửa</button>
+            <button class="btn btn-danger">Xóa</button>
+        </div>
+        <!-- Thêm các bình luận khác tại đây -->
+    </div>
+</div>
+
+
+
+
+
         </div>
         <!-- .animated -->
         <div class="clearfix"></div>
