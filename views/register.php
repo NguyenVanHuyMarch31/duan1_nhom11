@@ -104,7 +104,8 @@
             font-size: 0.8rem;
             margin-top: 0.5rem;
         }
-        .input-group{
+
+        .input-group {
             width: 357px;
         }
     </style>
@@ -115,88 +116,92 @@
         <a href="?act=trangchu" class="back-button">↩️Quay lại</a>
 
         <h2>Đăng ký</h2>
-        <form id="signup-form" action="<?= BASE_URL . '?act=dangky' ?>" method="post">
-            <div class="input-group">
-                <input class="input" type="text" placeholder="Tên đăng nhập" name="username" id="ten_dang_nhap" />
-                <div id="username-error" class="error-message"></div>
-            </div>
-
-            <div class="input-group">
-                <input class="input" type="email" placeholder="Email" name="email" id="email" />
-                <div id="email-error" class="error-message"></div>
-            </div>
-
-            <div class="input-group">
-                <input class="input" type="password" placeholder="Mật khẩu" name="password" id="mat_khau" />
-                <div id="password-error" class="error-message"></div>
-            </div>
-
-            <button class="btn" type="submit">Đăng ký</button>
-        </form>
-
-        <a class="login-link" href="?act=login">Đã có tài khoản? Đăng nhập</a>
+        <form id="signup-form" action="http://localhost/duan1_nhom11/?act=dangky" method="POST">
+    <div class="input-group">
+        <input class="input" type="text" placeholder="Tên đăng nhập" name="username" id="ten_dang_nhap" required />
+        <div id="username-error" class="error-message"></div>
     </div>
 
-    
+    <div class="input-group">
+        <input class="input" type="email" placeholder="Email" name="email" id="email" required />
+        <div id="email-error" class="error-message"></div>
+    </div>
 
-    <script>
-        function validateSignUpForm(event) {
-            event.preventDefault(); // Prevent form submission to handle validation
+    <div class="input-group">
+        <input class="input" type="password" placeholder="Mật khẩu" name="password" id="mat_khau" required />
+        <div id="password-error" class="error-message"></div>
+    </div>
 
-            // Clear previous error messages
-            document.getElementById('username-error').innerText = '';
-            document.getElementById('email-error').innerText = '';
-            document.getElementById('password-error').innerText = '';
-            document.getElementById('ten_dang_nhap').classList.remove('error');
-            document.getElementById('email').classList.remove('error');
-            document.getElementById('mat_khau').classList.remove('error');
+    <button class="btn" type="submit">Đăng ký</button>
+</form>
 
-            var valid = true;
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="success-message"><?= $_SESSION['success'] ?></div>
+            <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
 
-            var tenDangNhap = document.getElementById('ten_dang_nhap').value;
-            var email = document.getElementById('email').value;
-            var matKhau = document.getElementById('mat_khau').value;
+        Đã có tài khoản?<a class="login-link" href="?act=formLogin"> Đăng nhập</a>
 
-            if (tenDangNhap.trim() === "") {
-                valid = false;
-                document.getElementById('username-error').innerText = "Tên đăng nhập không được để trống.";
-                document.getElementById('ten_dang_nhap').classList.add('error');
-            }
 
-            if (email.trim() === "") {
-                valid = false;
-                document.getElementById('email-error').innerText = "Email không được để trống.";
-                document.getElementById('email').classList.add('error');
-            } else {
-                var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-                if (!emailPattern.test(email)) {
+
+        <script>
+            function validateSignUpForm(event) {
+                event.preventDefault(); // Prevent form submission to handle validation
+
+                // Clear previous error messages
+                document.getElementById('username-error').innerText = '';
+                document.getElementById('email-error').innerText = '';
+                document.getElementById('password-error').innerText = '';
+                document.getElementById('ten_dang_nhap').classList.remove('error');
+                document.getElementById('email').classList.remove('error');
+                document.getElementById('mat_khau').classList.remove('error');
+
+                var valid = true;
+
+                var tenDangNhap = document.getElementById('ten_dang_nhap').value;
+                var email = document.getElementById('email').value;
+                var matKhau = document.getElementById('mat_khau').value;
+
+                if (tenDangNhap.trim() === "") {
                     valid = false;
-                    document.getElementById('email-error').innerText = "Vui lòng nhập một địa chỉ email hợp lệ.";
+                    document.getElementById('username-error').innerText = "Tên đăng nhập không được để trống.";
+                    document.getElementById('ten_dang_nhap').classList.add('error');
+                }
+
+                if (email.trim() === "") {
+                    valid = false;
+                    document.getElementById('email-error').innerText = "Email không được để trống.";
                     document.getElementById('email').classList.add('error');
+                } else {
+                    var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                    if (!emailPattern.test(email)) {
+                        valid = false;
+                        document.getElementById('email-error').innerText = "Vui lòng nhập một địa chỉ email hợp lệ.";
+                        document.getElementById('email').classList.add('error');
+                    }
+                }
+
+                if (matKhau.trim() === "") {
+                    valid = false;
+                    document.getElementById('password-error').innerText = "Mật khẩu không được để trống.";
+                    document.getElementById('mat_khau').classList.add('error');
+                }
+
+                if (matKhau.length < 6) {
+                    valid = false;
+                    document.getElementById('password-error').innerText = "Mật khẩu phải có ít nhất 6 ký tự.";
+                    document.getElementById('mat_khau').classList.add('error');
+                }
+
+                // If everything is valid, submit the form
+                if (valid) {
+                    document.getElementById('signup-form').submit();
                 }
             }
 
-            if (matKhau.trim() === "") {
-                valid = false;
-                document.getElementById('password-error').innerText = "Mật khẩu không được để trống.";
-                document.getElementById('mat_khau').classList.add('error');
-            }
-
-            if (matKhau.length < 6) {
-                valid = false;
-                document.getElementById('password-error').innerText = "Mật khẩu phải có ít nhất 6 ký tự.";
-                document.getElementById('mat_khau').classList.add('error');
-            }
-
-            // If everything is valid, submit the form
-            if (valid) {
-                document.getElementById('signup-form').submit();
-            }
-        }
-
-        // Attach the validation function to form submission
-        document.getElementById('signup-form').addEventListener('submit', validateSignUpForm);
-    </script>
+            // Attach the validation function to form submission
+            document.getElementById('signup-form').addEventListener('submit', validateSignUpForm);
+        </script>
 </body>
 
 </html>

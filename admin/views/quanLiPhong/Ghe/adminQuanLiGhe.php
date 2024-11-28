@@ -12,7 +12,7 @@ usort($seats, function ($a, $b) {
     <?php require './views/layout/navbar.php'; ?>
     <div class="content">
         <div class="animated fadeIn">
-            <h3 style="text-align: center;">Quản lý ghế  </h3>
+            <h3 style="text-align: center;">Quản lý ghế </h3>
 
             <form action="<?= BASE_URL_ADMIN . '?act=changeSeatStatus'; ?>" method="POST">
                 <div class="seat-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px;">
@@ -71,9 +71,10 @@ usort($seats, function ($a, $b) {
                                 <form action="<?= BASE_URL_ADMIN . '?act=changeSeatStatus'; ?>" method="POST">
                                     <label for="seat_status">Chọn trạng thái ghế:</label>
                                     <select name="seat_status" id="seat_status">
-                                        <option value="1" <?= $seat['status'] == '1' ? 'selected' : '' ?>>Đã được chọn</option>
-                                        <option value="Bảo trì" <?= $seat['status'] == 'Bảo trì' ? 'selected' : '' ?>>Bảo trì</option>
-                                        <option value="Chưa được chọn" <?= $seat['status'] == 'Chưa được chọn' ? 'selected' : '' ?>>Chưa được chọn</option>
+                                        <option value="Ghế trống" <?= $seat['status'] == 'Ghế trống' ? 'selected' : '' ?>>Ghế trống
+                                        </option>
+                                        <option value="Ghế đã chọn" <?= $seat['status'] == 'Ghế đã chọn' ? 'selected' : '' ?>>Ghế đã chọn</option>
+                                        <option value="Ghế đã đặt" <?= $seat['status'] == 'Ghế đã đặt' ? 'selected' : '' ?>>Ghế đã đặt</option>
                                     </select>
                                     <button type="submit" name="change_status" value="<?= $seat['id_seat'] ?>"> Trạng thái</button>
                                 </form>

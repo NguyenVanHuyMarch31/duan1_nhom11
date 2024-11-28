@@ -1,7 +1,8 @@
 <?php
 
 // Hàm kết nối CSDL qua PDO
-function connectDB() {
+function connectDB()
+{
     $host = DB_HOST;
     $port = DB_PORT;
     $dbname = DB_NAME;
@@ -17,7 +18,8 @@ function connectDB() {
     }
 }
 
-function uploadFile($file, $folderUpload) {
+function uploadFile($file, $folderUpload)
+{
     if ($file['error'] !== UPLOAD_ERR_OK) {
         return null;
     }
@@ -28,19 +30,19 @@ function uploadFile($file, $folderUpload) {
         return null;
     }
 
-    if ($file['size'] > 5 * 1024 * 1024) { 
-        return null; 
+    if ($file['size'] > 5 * 1024 * 1024) {
+        return null;
     }
 
     $pathStorage = $folderUpload . time() . '_' . basename($file['name']);
-    $from = $file['tmp_name']; 
-    $to = PATH_ROOT . $pathStorage; 
+    $from = $file['tmp_name'];
+    $to = PATH_ROOT . $pathStorage;
 
     if (move_uploaded_file($from, $to)) {
-        return $pathStorage; 
+        return $pathStorage;
     }
 
-    return null; 
+    return null;
 }
 
 function deleteFile($fileName)
@@ -53,37 +55,69 @@ function deleteFile($fileName)
 
 
 
-function deleteSessionError() {
+function deleteSessionError()
+{
     if (isset($_SESSION['error'])) {
         unset($_SESSION['error']);
     }
 }
 
-        function uploadFileAlbum($file, $folderUpload, $key) {
-            if ($file['error'][$key] !== UPLOAD_ERR_OK) {
-                return null; 
-            }
+function uploadFileAlbum($file, $folderUpload, $key)
+{
+    if ($file['error'][$key] !== UPLOAD_ERR_OK) {
+        return null;
+    }
 
-            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-            $fileExtension = pathinfo($file['name'][$key], PATHINFO_EXTENSION);
-            if (!in_array(strtolower($fileExtension), $allowedExtensions)) {
-                return null; 
-            }
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    $fileExtension = pathinfo($file['name'][$key], PATHINFO_EXTENSION);
+    if (!in_array(strtolower($fileExtension), $allowedExtensions)) {
+        return null;
+    }
 
-            if ($file['size'][$key] > 5 * 1024 * 1024) {
-                return null; 
-            }
+    if ($file['size'][$key] > 5 * 1024 * 1024) {
+        return null;
+    }
 
-            $pathStorage = $folderUpload . time() . '_' . basename($file['name'][$key]);
-            $from = $file['tmp_name'][$key]; 
-            $to = PATH_ROOT . $pathStorage;
+    $pathStorage = $folderUpload . time() . '_' . basename($file['name'][$key]);
+    $from = $file['tmp_name'][$key];
+    $to = PATH_ROOT . $pathStorage;
 
-            if (move_uploaded_file($from, $to)) {
-                return $pathStorage; 
-            }
+    if (move_uploaded_file($from, $to)) {
+        return $pathStorage;
+    }
 
-            return null; 
-        }
-
-
-?>
+    return null;
+}
+// function getSeatClass($status, $type)
+// {
+//     $classes = [];
+//     // Xử lý trạng thái ghế
+//     switch ($status) {
+//         case 'available':
+//             $classes[] = 'available';
+//             break;
+//         case 'selected':
+//             $classes[] = 'selected';
+//             break;
+//         case 'booked':
+//             $classes[] = 'booked';
+//             break;
+//         default:
+//             $classes[] = 'available';
+//     }
+//     // Xử lý loại ghế
+//     switch ($type) {
+//         case 'vip':
+//             $classes[] = 'vip';
+//             break;
+//         case 'regular':
+//             $classes[] = 'regular';
+//             break;
+//         case 'deluxe':
+//             $classes[] = 'deluxe';
+//             break;
+//         default:
+//             $classes[] = 'regular';
+//     }
+//     return implode(' ', $classes);
+// }
