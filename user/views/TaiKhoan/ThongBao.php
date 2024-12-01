@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tài Khoản CGV</title>
+    <title>Thông Báo Đặt Vé</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -91,74 +91,45 @@
             font-weight: 600;
         }
 
-        .profile {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 20px;
+        .notification-box {
+            background-color: pink;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 50%;
+            padding-top: 80px;
+            margin-bottom: 250px;
+            text-align: center;
         }
 
-        .profile-info {
-            flex: 65%;
-            padding-right: 30px;
+        .notification-box h1 {
+            color: #28a745;
+            font-size: 32px;
+            margin-bottom: 20px;
         }
 
-        .profile-info p {
-            font-size: 18px;
+        .notification-box p {
             color: #555;
-            margin: 12px 0;
+            font-size: 18px;
+            margin-bottom: 20px;
             line-height: 1.6;
         }
 
-        .profile-info p span {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .profile-info a {
-            text-decoration: none;
-            color: #007bff;
-            font-weight: 500;
-        }
-
-        .profile-info a:hover {
-            text-decoration: underline;
-            color: #0056b3;
-        }
-
-        .profile-avatar {
-            flex: 35%;
-            text-align: center;
-        }
-
-        .profile-avatar img {
-            border-radius: 50%;
-            width: 140px;
-            height: 140px;
-            border: 4px solid #007bff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .update-button {
-            display: block;
-            width: 220px;
-            margin: 30px auto;
-            padding: 12px;
-            background-color: #28a745;
+        .notification-box .btn {
+            background-color: #007bff;
             color: white;
-            text-align: center;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
+            padding: 12px 20px;
             border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
             transition: background-color 0.3s ease;
         }
 
-        .update-button:hover {
-            background-color: #218838;
+        .notification-box .btn:hover {
+            background-color: #0056b3;
         }
 
         .footer {
@@ -177,36 +148,24 @@
         <div class="sidebar">
             <h2>TÀI KHOẢN BFH</h2>
             <?php require './views/layout/sidebar.php' ?>
+
         </div>
 
         <!-- Content Section -->
         <div class="content">
             <div class="header">
-                <h1>Thông Tin Tài Khoản Người Dùng</h1>
+                <h1>Thông Báo Đặt Vé</h1>
             </div>
+            <br><br>
 
-            <div class="profile">
-                <div class="profile-info">
-                    <p><span>Tên Đăng Nhập:</span><?= $account['username'] ?></p>
-                    <p><span>Họ và Tên:</span><?= $account['full_name'] ?></p>
-                    <p><span>Email:</span> <?= $account['email'] ?></p>
-                    <p><span>Ngày Sinh:</span> <?= $account['birth_date'] ?></p>
-                    <p><span>Địa Chỉ:</span> <?= $account['address'] ?></p>
-                    <p><span>Giới Tính:</span> <?= $account['gender'] ?></p>
-                    <p><span>Số Điện Thoại:</span><?= $account['phone'] ?></p>
-                    <p><span>Chỉnh sửa tài khoản:</span> <a href="#">Chỉnh sửa thông tin</a></p>
-                </div>
-
-                <div class="profile-avatar">
-                <img src="<?= BASE_URL_USER . $account['thumbnail'] ?>" alt="<?= $account['username'] ?? 'Ảnh đại diện' ?>" onerror="this.onerror=null; this.src='https://i.pinimg.com/474x/8b/ec/ad/8becad61ee85c3c02b460bddf5ba7905.jpg'">
-
-                </div>
+            <div class="notification-box">
+                <h1 class="success">Đặt Vé Thành Công</h1>
+                <p>Cảm ơn bạn đã đặt vé cho bộ phim "Avengers: Endgame" vào lúc 19:00, ngày 30/11. Chúc bạn xem phim vui vẻ!</p>
+                <a href="#" class="btn">Xem Thông Tin Đặt Vé</a>
             </div>
-
-            <button class="update-button">Cập Nhật Thông Tin</button>
 
             <div class="footer">
-                <p>© 2024 Nguyễn Văn Huy - Tất cả các quyền được bảo lưu.</p>
+                <p>© 2024 BFH - Tất cả các quyền được bảo lưu.</p>
             </div>
         </div>
     </div>

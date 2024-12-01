@@ -12,43 +12,31 @@ class modelTickets
     {
         $this->conn = null;
     }
-    public function getAllTicket()
+    public function getTickets()
     {
-        $sql = "
-            SELECT 
-                showtimes.showtime_id,
-                movie.movie_name,
-                tickets.id_ticket,
-                cinema_room.room_name,
-                showtimes.start_time, 
-                showtimes.end_time, 
-                (SELECT COUNT(seat.id_seat) 
-                FROM seat 
-                WHERE seat.cinema_room_id = cinema_room.id_cinema_room) AS total_seats,
-                (SELECT COUNT(seat.id_seat) 
-                FROM seat 
-                WHERE seat.cinema_room_id = cinema_room.id_cinema_room AND seat.status = '1') AS reserved_seats,
-                MAX(seat.ticket_price) AS ticket_price
-            FROM
-                showtimes
-            LEFT JOIN tickets ON showtimes.showtime_id = tickets.showtime_id
-            LEFT JOIN seat ON tickets.seat_id = seat.id_seat
-            INNER JOIN cinema_room ON showtimes.id_cinema_room = cinema_room.id_cinema_room
-            INNER JOIN movie ON showtimes.movie_id = movie.movie_id
-            GROUP BY 
-                showtimes.showtime_id, 
-                movie.movie_name, 
-                tickets.id_ticket,
-                cinema_room.room_name, 
-                showtimes.start_time, 
-                showtimes.end_time
-            ORDER BY 
-                showtimes.start_time ASC;
-
-        ";
+        $sql = "SELECT 
+        MIN(t.id_ticket) AS id_ticket, -- Chọn ID nhỏ nhất trong nhóm
+        m.movie_name,
+        s.start_time,
+        GROUP_CONCAT(st.seat_name ORDER BY st.seat_name SEPARATOR ', ') AS seats,
+        t.price
+    FROM 
+        tickets t
+    JOIN 
+        movie m ON t.movie_id = m.movie_id
+    JOIN 
+        showtimes s ON t.showtime_id = s.showtime_id
+    JOIN 
+        seat st ON t.seat_id = st.id_seat
+    GROUP BY 
+        m.movie_name, s.start_time, t.price
+    ORDER BY 
+        s.start_time, m.movie_name
+            ";
+            
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     }
 }

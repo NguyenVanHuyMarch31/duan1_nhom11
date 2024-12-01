@@ -97,6 +97,37 @@ class quanTriTaiKhoanModel
     
         return $stmt->execute();
     }
+    public function getAccountById($id_account) {
+        $stmt = $this->conn->prepare("SELECT * FROM account WHERE id_account = :id_account");
+        $stmt->execute([':id_account' => $id_account]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateAccount($id_account, $username, $email, $full_name, $birth_date, $gender, $thumbnail, $address, $phone) {
+        $sql = "UPDATE account SET 
+                username = :username, 
+                email = :email, 
+                full_name = :full_name, 
+                birth_date = :birth_date, 
+                gender = :gender, 
+                thumbnail = :thumbnail, 
+                address = :address, 
+                phone = :phone
+                WHERE id_account = :id_account";
+        
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([
+            ':id_account' => $id_account,
+            ':username' => $username,
+            ':email' => $email,
+            ':full_name' => $full_name,
+            ':birth_date' => $birth_date,
+            ':gender' => $gender,
+            ':thumbnail' => $thumbnail,
+            ':address' => $address,
+            ':phone' => $phone
+        ]);
+    }
     
     
 }

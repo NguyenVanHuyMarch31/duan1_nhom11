@@ -74,7 +74,7 @@ usort($seats, function ($a, $b) {
                                         <option value="Ghế trống" <?= $seat['status'] == 'Ghế trống' ? 'selected' : '' ?>>Ghế trống
                                         </option>
                                         <option value="Ghế đã chọn" <?= $seat['status'] == 'Ghế đã chọn' ? 'selected' : '' ?>>Ghế đã chọn</option>
-                                        <option value="Ghế đã đặt" <?= $seat['status'] == 'Ghế đã đặt' ? 'selected' : '' ?>>Ghế đã đặt</option>
+                                        <option value="Đã đặt" <?= $seat['status'] == 'Đã đặt' ? 'selected' : '' ?>>Ghế đã đặt</option>
                                     </select>
                                     <button type="submit" name="change_status" value="<?= $seat['id_seat'] ?>"> Trạng thái</button>
                                 </form>

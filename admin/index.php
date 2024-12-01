@@ -83,6 +83,9 @@ match ($act) {
     'phanQuyen'=>(new quanTriTaiKhoanController())->phanQuyen(),
     'themTaiKhoan'=>(new quanTriTaiKhoanController())->themTaiKhoan(),
     'formThemTaiKhoan'=>(new quanTriTaiKhoanController())->formThemTaiKhoan(),
+    'formSuaTaiKhoan'=>(new quanTriTaiKhoanController())->formSuaTaiKhoan(),
+    'postEditTaiKhoan'=>(new quanTriTaiKhoanController())->postEditTaiKhoan(),
+
     
 
 
@@ -100,7 +103,7 @@ match ($act) {
     'suaVe' =>(new quanTriVeController())->quanTriVe(),
     
     'quanTriDatHang' =>(new quanTriDatHangController())->quanTriDatHang(),
-    // 'themDatHang' =>(new quanTriDatHangController())->themDatHang(),
-    // 'deleteDatHang' =>(new quanTriDatHangController())->deleteDatHang(),
-    // 'chiTietDatHang' =>(new quanTriDatHangController())->chiTietDatHang(),
+    'xacNhanDonHang' =>(new quanTriDatHangController())->xacNhanDonHang(),
+    'huyDonHang' =>(new quanTriDatHangController())->huyDonHang(),
+    'chiTietDonHang' =>(new quanTriDatHangController())->chiTietDonHang(),
 };

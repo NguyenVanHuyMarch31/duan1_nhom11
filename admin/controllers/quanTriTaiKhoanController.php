@@ -109,5 +109,78 @@ class quanTriTaiKhoanController
             echo "Phương thức yêu cầu không hợp lệ.";
         }
     }
+     public function formSuaTaiKhoan() {
+        $id_account = $_GET['id'];
+        $account = $this->modelTaiKhoan->getAccountById($id_account);
+        
+        require_once './views/quanLiTaiKhoan/suaTaiKhoan.php';
+    }
+
+    public function postEditTaiKhoan() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
+            $id_account = $_POST['id_account'];
+            $existingAccount = $this->modelTaiKhoan->getAccountById($id_account);
+            $file_old = $existingNews['thumbnail'] ?? null;
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $full_name = $_POST['full_name'];
+            $birth_date = $_POST['birth_date'];  // Make sure the birth date is in the correct format
+            $gender = $_POST['gender'];
+            $address = $_POST['address'];
+            $phone = $_POST['phone'];
+    
+            $new_file = $file_old;
+            $thumbnail = $_FILES['thumbnail'] ?? null; 
+            if (isset($thumbnail) && $thumbnail['error'] == UPLOAD_ERR_OK) {
+                $new_file = uploadFile($thumbnail, './uploads/');
+                if ($new_file) {
+                    if ($file_old) {
+                        deleteFile($file_old);  
+                    }
+                } else {
+                    $error['thumbnail'] = 'Có lỗi khi tải lên ảnh mới.';
+                }
+            }
+    
+            if (empty($error)) {
+                $updateStatus = $this->modelTaiKhoan->updateAccount(
+                    $id_account, $username, $email, $full_name, $birth_date, $gender, 
+                    $new_file, $address, $phone
+                );
+                
+                if ($updateStatus) {
+                    header('Location: ' . BASE_URL_ADMIN . '?act=quanTriTaiKhoan');
+                    exit();
+                } else {
+                    $error['update'] = 'Có lỗi xảy ra khi cập nhật tài khoản.';
+                }
+            }
+        }
+    }
+    
+    public function uploadFile($file, $uploadDir) {
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        if (!in_array($file['type'], $allowedTypes)) {
+            return null;  
+        }
+    
+        if ($file['size'] > 2 * 1024 * 1024) {
+            return null; 
+        }
+    
+        $fileName = uniqid() . '-' . basename($file['name']);
+        $filePath = $uploadDir . $fileName;
+    
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+    
+        if (move_uploaded_file($file['tmp_name'], $filePath)) {
+            return $fileName;  
+        }
+    
+        return null; 
+    }
     
 }

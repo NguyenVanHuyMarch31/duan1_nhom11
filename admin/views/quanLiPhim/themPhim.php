@@ -1,14 +1,4 @@
-<?php require './views/layout/header.php' ?>
-<?php require './views/layout/sidebar.php' ?>
-<!-- Right Panel -->
-<div id="right-panel" class="right-panel">
-    <?php require './views/layout/navbar.php' ?>
-    <!-- Content -->
-    <div class="content">
-        <div class="animated fadeIn">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">
+
                         <h3>Thêm phim mới</h3>
                     </div>
                     <div class="card-body card-block">

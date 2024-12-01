@@ -26,6 +26,12 @@ match ($act) {
     'quanTriTaiKhoan' => (new userController())->quanTriTaiKhoan(),  
 
     'thongTinTaiKhoan' => (new userController())->thongTinTaiKhoan(),
+    'thongbao' => (new userController())->thongbao(),
+    'suaTaiKhoan' => (new userController())->suaTaiKhoan(),
+    'postTaiKhoan' => (new userController())->postTaiKhoan(),
+
+    'doiMatKhau' => (new userController())->doiMatKhau(),
+    'lichSuDatVe' => (new userController())->lichSuDatVe(),
 
 
 
@@ -38,11 +44,9 @@ match ($act) {
 
 
     'datVe'=>(new quanTriDatVeController())->datVe(),
-    // 'datVeThanhCong'=>(new quanTriDatVeController())->datVeThanhCong(),
-    // 'datVeThatBai'=>(new quanTriDatVeController())->datVeThatBai(),
-    // 'thongTinDatVe'=>(new quanTriDatVeController())->thongTinDatVe(),
-    // 'huyDatVe'=>(new quanTriDatVeController())->huyDatVe(),
-
+    // 'postDatVe'=>(new quanTriDatVeController())->postDatVe(),
+    // 'datHang'=>(new quanTriDatVeController())->datHang(),
+    
 };
 
 ?>

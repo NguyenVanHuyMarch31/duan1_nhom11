@@ -839,7 +839,265 @@
         .form-group button:hover {
             background: #0056b3;
         }
-        
+        .order-management {
+            max-width: 1200px; /* Đặt chiều rộng tối đa thành 1000px */
+            margin: 30px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Thanh tìm kiếm */
+        .search-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        #search-input {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+        #search-input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        #search-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #search-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Bảng danh sách đơn hàng */
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-table th, .order-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .order-table th {
+            background-color: #007bff;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        /* Trạng thái đơn hàng */
+        .status {
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status.pending {
+            background-color: #f0ad4e;
+            color: white;
+        }
+
+        .status.confirmed {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .status.canceled {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        /* Nút hành động */
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .view-btn:hover {
+            background-color: #138496;
+        }
+
+        .confirm-btn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .confirm-btn:hover {
+            background-color: #218838;
+        }
+
+        .cancel-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background-color: #c82333;
+        }
+
+        /* Hiệu ứng hover cho các hàng */
+        .order-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #search-input {
+                width: 45%;
+            }
+
+            .order-table th, .order-table td {
+                font-size: 14px;
+            }
+        }
+         /* Bảng danh sách vé */
+         .ticket-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .ticket-table th, .ticket-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .ticket-table th {
+            background-color: #007bff;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .ticket-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .action-btn {
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .view-btn {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .view-btn:hover {
+            background-color: #138496;
+        }
+
+        .edit-btn {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background-color: #e0a800;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+        .details-section {
+            margin-bottom: 30px;
+        }
+        .details-section h3 {
+            color: #007bff;
+        }
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .details-table th, .details-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .details-table th {
+            background-color: #f1f1f1;
+        }
+        .total-price {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+        .btn-print {
+            background-color: #28a745;
+        }
+        .btn-primary {
+            background-color: #007bff;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
     </style>
 
 </head>

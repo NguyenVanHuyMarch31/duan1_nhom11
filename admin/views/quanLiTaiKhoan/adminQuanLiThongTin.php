@@ -20,7 +20,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th >Tên tài khoản</th>
+                            <th>Tên tài khoản</th>
                             <th style="text-align: center;">Email</th>
                             <th style="text-align: center;">Họ và tên</th>
                             <th style="text-align: center;">Hình ảnh</th>
@@ -44,12 +44,16 @@
                                 <td><?= $account['status'] == 1 ? 'Kích hoạt' : 'Vô hiệu hóa'; ?></td>
                                 <td>
                                     <div class="btn-group">
+                                        <a href="<?= BASE_URL_ADMIN . '?act=formSuaTaiKhoan&id=' . $account['id_account']; ?>" class="btn btn-primary btn-sm" title="Sửa Tài Khoản">
+                                            <i class="fa fa-edit"></i> 
+                                        </a>
+
                                         <!-- Chi tiết -->
                                         <a href="<?= BASE_URL_ADMIN . '?act=chiTietTaiKhoan&id=' . $account['id_account']; ?>" class="btn btn-info btn-sm" title="Chi tiết">
                                             <i class="fa fa-info-circle"></i>
                                         </a>
 
-                                       
+
                                         <!-- Vô hiệu hóa / Kích hoạt -->
                                         <a href="<?= BASE_URL_ADMIN . '?act=doiTrangThai&id=' . $account['id_account']; ?>" class="btn btn-warning btn-sm" title="<?= $account['status'] == 1 ? 'Vô hiệu hóa' : 'Kích hoạt'; ?>">
                                             <i class="fa <?= $account['status'] == 1 ? 'fa-lock' : 'fa-unlock'; ?>"></i>

@@ -2,50 +2,39 @@
 class quanTriDatVeController
 {
     public $modelDatVe;
+    public $modelPhim;
 
     public function __construct()
     {
         $this->modelDatVe = new modelDatVes();
-    }
-
-    // Trang chủ
-    public function trangchu()
-    {
-        require_once './views/trangchu.php';
+        $this->modelPhim = new modelPhimDangchieus();
     }
 
     public function datVe()
     {
-        // Lấy thông tin movie_id từ URL (nếu có)
-        $movie_id = isset($_GET['movie_id']) ? $_GET['movie_id'] : 1;
+        $movie_id = isset($_GET['movie_id']) ? $_GET['movie_id'] : 0;
 
-        // Lấy thông tin phim từ model
-        $movie_details = $this->modelDatVe->getMovieDetails($movie_id);
+        // Lấy thông tin phim
+        $movie = $this->modelPhim->getMovieById($movie_id);
 
-        // Lấy tất cả suất chiếu của phim
-        $showtimes = $this->modelDatVe->getShowtimes($movie_id);
+        // Lấy danh sách suất chiếu
+        $showtimes = $this->modelDatVe->getShowtimesByMovieId($movie_id);
 
-        // Mảng để lưu thông tin phòng chiếu và ghế cho mỗi suất chiếu
-        $showtimeDetails = [];
-
-        foreach ($showtimes as $showtime) {
-            // Lấy thông tin phòng chiếu cho suất chiếu
-            $theaters = $this->modelDatVe->getTheaters($showtime['showtime_id']);
-
-            // Lấy thông tin ghế cho suất chiếu
-            $seats = $this->modelDatVe->getSeats($showtime['showtime_id']);
-
-            // Lưu thông tin phòng chiếu và ghế vào mảng
-            $showtimeDetails[] = [
-                'showtime' => $showtime,
-                'theaters' => $theaters,
-                'seats' => $seats
-            ];
+        // Lấy danh sách phòng chiếu nếu có suất chiếu được chọn
+        $selected_showtime_id = isset($_POST['showtime_id']) ? $_POST['showtime_id'] : null;
+        $cinema_rooms = [];
+        if ($selected_showtime_id) {
+            $cinema_rooms = $this->modelDatVe->getCinemaRoomByShowtimeId($selected_showtime_id);
         }
 
-        // Truyền dữ liệu tới view
+        // Lấy danh sách ghế nếu có phòng chiếu được chọn
+        $selected_cinema_room_id = isset($_POST['cinema_room_id']) ? $_POST['cinema_room_id'] : null;
+        $seats = [];
+        if ($selected_cinema_room_id) {
+            $seats = $this->modelDatVe->getSeatsByCinemaRoomId($selected_cinema_room_id);
+        }
+
+        // Gửi dữ liệu sang view
         require_once './views/DonHang/DatHang.php';
     }
 }
-
-

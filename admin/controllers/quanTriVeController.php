@@ -9,7 +9,7 @@ class quanTriVeController
 
     public function quanTriVe()
     {
-        $ticket = $this->modelTicket->getAllTicket();
+        $listTickets = $this->modelTicket->getTickets();
         require_once './views/quanLiDanhSachVe/adminQuanLiDanhSachVe.php';
     }
     public function suaVe(){
@@ -19,7 +19,6 @@ class quanTriVeController
 
     }
     public function themVe(){
-        require_once './views/';
     }
     
 }

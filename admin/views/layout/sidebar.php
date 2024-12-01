@@ -20,7 +20,7 @@
                     </li> -->
 
                     <li class="menu-item dropdown">
-                        <a href="<?php echo BASE_URL_ADMIN . '?act=quanTriVe' ?>"><i class="menu-icon fa fa-shopping-cart"></i>Quản lý danh sách đặt vé
+                        <a href="<?php echo BASE_URL_ADMIN . '?act=quanTriVe' ?>"><i class="menu-icon fa fa-ticket"></i>Quản lý danh sách đặt vé
                         </a>
                     </li>
                     <!-- <li class="menu-item dropdown">
@@ -36,7 +36,7 @@
                         <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-bar-chart-o"></i>Thống kê </a>
                     </li>
                     <li class="menu-item dropdown">
-                        <a href="<?php echo BASE_URL_ADMIN . '?act=quanTriDatHang' ?>"><i class="menu-icon fa fa-bar-chart-o"></i>Đặt hàng</a>
+                        <a href="<?php echo BASE_URL_ADMIN . '?act=quanTriDatHang' ?>"><i class="menu-icon fa fa-shopping-cart"></i>Đặt hàng</a>
                     </li>
                     <li class="menu-item dropdown">
                         <a href="<?php echo BASE_URL_ADMIN . '?act=quanTriSuatChieu' ?>"><i class="menu-icon fa fa-calendar"></i>Suất chiếu </a>
