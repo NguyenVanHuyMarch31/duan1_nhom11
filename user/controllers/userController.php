@@ -53,10 +53,7 @@ class UserController
         // Kiểm tra người dùng đã đăng nhập chưa
         if (isset($_SESSION['user']['id_account'])) {
             $id_account = $_SESSION['user']['id_account'];
-            // $full_name = $_SESSION['user']['full_name'];
-            // $email = $_SESSION['user']['email'];
-            // $phone = $_SESSION['user']['phone'];
-            // $id_account = $_SESSION['user']['id_account'];
+           
 
 
             // Lấy thông tin tài khoản từ model

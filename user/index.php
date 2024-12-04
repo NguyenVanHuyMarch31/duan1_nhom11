@@ -6,6 +6,8 @@ require_once './controllers/userController.php';
 require_once './controllers/quanTriTinTucController.php';
 require_once './controllers/quanTriPhimDangChieuController.php';
 require_once './controllers/quanTriDatVeController.php';
+require_once './controllers/quanTriThanhToan.php';
+
 
 
 
@@ -13,6 +15,7 @@ require_once './models/userModel.php';
 require_once './models/quanTriTinTucModel.php';
 require_once './models/quanTriPhimDangChieuModel.php';
 require_once './models/quanTriDatVeModel.php';
+require_once './models/modelThanhToan.php';
 
 $act = $_GET['act'] ?? '/';
 
@@ -44,8 +47,10 @@ match ($act) {
 
 
     'datVe'=>(new quanTriDatVeController())->datVe(),
-    // 'postDatVe'=>(new quanTriDatVeController())->postDatVe(),
-    // 'datHang'=>(new quanTriDatVeController())->datHang(),
+    'postDatVe'=>(new quanTriDatVeController())->postDatVe(),
+    'chiTietDatHang'=>(new quanTriDatVeController())->chiTietDatHang(),
+    'camOn'=>(new quanTriDatVeController())->camOn(),
+    // 'chiTietDatHang'=>(new thanhToanController())->showTicketDetails($ticketId, $orderId),
     
 };
 

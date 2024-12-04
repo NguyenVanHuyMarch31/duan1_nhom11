@@ -16,23 +16,22 @@
             </div>
         </div>
 
-        <!-- Form đặt vé -->
-        <form action="" method="POST">
-            <!-- Chọn suất chiếu -->
+        <form action="<?= BASE_URL_USER . '?act=postDatVe' ?>" method="post" id="booking-form">
+            <input type="hidden" name="movie_id" value="<?= $movie_id ?>"><?= $movie['movie_name'] ?> <!-- Chọn suất chiếu -->
             <h3>Chọn Suất Chiếu</h3>
-            <select name="showtime_id" id="showtime" onchange="this.form.submit()">
+            <select name="showtime_id" id="showtime" onchange="updateSeats()">
                 <option value="">Chọn Suất Chiếu</option>
                 <?php foreach ($showtimes as $showtime): ?>
                     <option value="<?= $showtime['showtime_id'] ?>" <?= isset($selected_showtime_id) && $selected_showtime_id == $showtime['showtime_id'] ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($showtime['start_time'] . " - " . $showtime['room_name']) ?>
+                        <?= htmlspecialchars($showtime['start_time']) ?>
                     </option>
                 <?php endforeach; ?>
             </select>
 
-            <!-- Chọn phòng chiếu -->
             <?php if (!empty($cinema_rooms)): ?>
+                <!-- Chọn phòng chiếu -->
                 <h3>Chọn Phòng Chiếu</h3>
-                <select name="cinema_room_id" id="cinema_room" onchange="this.form.submit()">
+                <select name="cinema_room_id" id="cinema-room" onchange="updateSeats()">
                     <option value="">Chọn Phòng Chiếu</option>
                     <?php foreach ($cinema_rooms as $room): ?>
                         <option value="<?= $room['id_cinema_room'] ?>" <?= isset($selected_cinema_room_id) && $selected_cinema_room_id == $room['id_cinema_room'] ? 'selected' : '' ?>>
@@ -41,25 +40,45 @@
                     <?php endforeach; ?>
                 </select>
             <?php endif; ?>
+            <?php if (!empty($cinema_rooms)): ?>
+                <!-- Chọn phòng chiếu -->
+                <h3>Chọn Ghế</h3>
+
+                        <select name="seat_id[]" id="cinema-room" class="form-control" multiple>
+                            <?php foreach ($seats as $seat): ?>
+                                <option value="<?= htmlspecialchars($seat['id_seat']) ?>"
+                                    <?= $seat['status'] == 'Đã đặt' ? 'disabled' : ''; ?>>
+                                    <?= htmlspecialchars($seat['seat_name']) ?>
+                                    <?php if ($seat['status'] == 'Đã đặt') echo '(Đã đặt)'; ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    
+            <?php else: ?>
+                <p>Không có phòng chiếu hoặc ghế nào khả dụng.</p>
+            <?php endif; ?>
+
+
             <?php if (!empty($seats)): ?>
+                <!-- Chọn ghế -->
                 <h3>Chọn Ghế</h3>
                 <div class="screen-container">
                     <div class="screen">Màn hình</div>
                 </div>
-                <div class="seats-container">
+                <div class="seats-container" id="seats-container">
                     <?php foreach ($seats as $seat): ?>
-                        <div class="seat 
-                    <?= ($seat['status'] == 'unavailable') ? 'unavailable' : '' ?> 
-                    <?= ($seat['seat_type_id'] == 2) ? 'yellow' : '' ?>
-                    <?= ($seat['seat_type_id'] == 1) ? 'pink' : '' ?>
-                    <?= ($seat['seat_type_id'] == 3) ? 'red' : '' ?>
-                    <?= ($seat['status'] == 'booked') ? 'booked' : '' ?>"
-                    type="<?= $seat['ticket_price'] ?>
+                        <div class="seat
+                            <?= ($seat['status'] == 'unavailable') ? 'unavailable' : '' ?>
+                            <?= ($seat['seat_type_id'] == 2) ? 'yellow' : '' ?>
+                            <?= ($seat['seat_type_id'] == 1) ? 'pink' : '' ?>
+                            <?= ($seat['seat_type_id'] == 3) ? 'red' : '' ?>
+                            <?= ($seat['status'] == 'booked') ? 'booked' : '' ?>"
                             data-seat-id="<?= $seat['id_seat'] ?>"
                             data-seat-name="<?= htmlspecialchars($seat['seat_name']) ?>"
                             data-row="<?= htmlspecialchars($seat['seat_row']) ?>"
                             data-column="<?= htmlspecialchars($seat['seat_column']) ?>">
-                            <input type="checkbox" name="selected_seats[]" value="<?= $seat['id_seat'] ?>" class="seat-checkbox">
+                            <input type="checkbox" name="selected_seats[]" value="<?= $seat['id_seat'] ?>" class="seat-checkbox"
+                                <?= ($seat['status'] == 'unavailable' || $seat['status'] == 'booked') ? 'disabled' : '' ?>>
                             <label><?= htmlspecialchars($seat['seat_name']) ?></label>
                             <?php if ($seat['status'] == 'Đã đặt'): ?>❌
                             <?php elseif ($seat['status'] == 'Ghế trống'): ?>🪑
@@ -70,15 +89,15 @@
                     <?php endforeach; ?>
                 </div>
 
+                <!-- Ghế legend -->
                 <div class="seats-legend">
                     <h4>Ghi chú</h4>
-                    <!-- Căn chỉnh loại ghế bên phải và trạng thái ghế bên trái -->
                     <div class="legend-container">
                         <div class="legend-item">
                             <span class="seat-color yellow"></span> Ghế Vip
                         </div>
                         <div class="legend-item">
-                        ✔️ Ghế đã chọn
+                            ✔️ Ghế đã chọn
                         </div>
                     </div>
                     <div class="legend-container">
@@ -100,36 +119,41 @@
                 </div>
             <?php endif; ?>
 
-<br><br>
-
-            <!-- Nút xác nhận -->
-<button class="confirm-btn" type="submit">Xác Nhận Chọn Ghế</button>
-
+            <button class="confirm-btn" type="submit">Xác Nhận Chọn Ghế</button>
         </form>
     </div>
 
     <footer>
         <p>&copy; 2024 Cinema Booking. Tất cả các quyền được bảo lưu.</p>
     </footer>
+
     <script>
-        document.querySelectorAll('.seat').forEach(function(seat) {
-            seat.addEventListener('click', function() {
-                if (seat.classList.contains('unavailable')) {
-                    return; // Không cho phép chọn ghế đã hết
-                }
+        function updateSeats() {
+            const selectedShowtime = document.getElementById("showtime").value;
+            const selectedRoom = document.getElementById("cinema-room").value;
 
+            // Disable all seats initially
+            const seats = document.querySelectorAll('.seat');
+            seats.forEach(seat => {
                 const checkbox = seat.querySelector('.seat-checkbox');
-                if (checkbox.checked) {
-                    seat.classList.remove('selected');
-                    checkbox.checked = false;
-                } else {
-                    seat.classList.add('selected');
-                    checkbox.checked = true;
-                }
+                checkbox.disabled = true;
+                checkbox.checked = false;
+                seat.classList.remove('selected');
             });
-        });
-    </script>
 
+            // If both showtime and room are selected, enable available seats
+            if (selectedShowtime && selectedRoom) {
+                seats.forEach(seat => {
+                    if (!seat.classList.contains('unavailable') && !seat.classList.contains('booked')) {
+                        const checkbox = seat.querySelector('.seat-checkbox');
+                        checkbox.disabled = false; // Enable checkbox for available seats
+                        checkbox.checked = true; // Mark the seat as selected by default
+                        seat.classList.add('selected');
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 
 </html>

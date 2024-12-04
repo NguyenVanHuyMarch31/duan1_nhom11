@@ -456,5 +456,26 @@
             transform: translateY(2px);
             box-shadow: 0 6px 10px rgba(255, 69, 0, 0.2);
         }
+        .seat {
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.seat input[type="checkbox"] {
+    margin-top: 5px;
+}
+
+.seat:hover {
+    background-color: #e0f7fa; /* Màu nền khi hover */
+}
+
+.seat input[type="checkbox"]:checked {
+    background-color: #4caf50; /* Màu nền khi chọn */
+}
+
     </style>
 </head>
