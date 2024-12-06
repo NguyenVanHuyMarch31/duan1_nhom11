@@ -4,6 +4,7 @@
 
     </header>
 
+   
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
@@ -16,55 +17,17 @@
     <section class="featured-movies">
         <h2 class="section-title">Phim Nổi Bật</h2>
         <div class="movie-grid">
-            <div class="movie-item">
-                <img src="https://i.pinimg.com/236x/d1/44/9c/d1449cf0ef6efa6386bd8df6b99a3edd.jpg" alt="Phim 1">
-                <div class="movie-info">
-                    <h3>Ở nhà một mình </h3>
-                    <p>Thể loại: Trẻ em/Hài</p>
+            <?php foreach ($listMovies as $movie) {
+            ?>
+                <div class="movie-item">
+                    <img src="<?= BASE_URL . $movie['poster'] ?>" alt="Phim 1">
+                    <div class="movie-info">
+                        <h3><?= $movie['movie_name'] ?> </h3>
+                        <p></p>
+                    </div>
                 </div>
-            </div>
-            <div class="movie-item">
-                <img src="https://i.pinimg.com/236x/15/4a/66/154a6638fcf59b56b0a4aaf052752aa8.jpg" alt="Phim 2">
-                <div class="movie-info">
-                    <h3>Tiên hắc ám</h3>
-                    <p>Thể loại: Trẻ em/Kỳ ảo</p>
-                </div>
-            </div>
-            <div class="movie-item">
-                <img src="https://i.pinimg.com/236x/3f/be/ba/3fbebabfb00e74ff6be92486d004a79d.jpg" alt="Phim 3">
-                <div class="movie-info">
-                    <h3>Xứ sở các nguyên tố</h3>
-                    <p>Thể loại: Trẻ em/Hài</p>
-                </div>
-            </div>
-            <div class="movie-item">
-                <img src="https://i.pinimg.com/474x/42/00/da/4200dae9ac7b15a5c65375cbfaceaa69.jpg" alt="Phim 4">
-                <div class="movie-info">
-                    <h3>Avengers</h3>
-                    <p>Thể loại: Hành động/Khoa học viễn tưởng</p>
-                </div>
-            </div>
-            <div class="movie-item">
-                <img src="https://i.pinimg.com/236x/23/75/4b/23754b0b1fc5d35c1ee3159ae7cf6acc.jpg" alt="Phim 5">
-                <div class="movie-info">
-                    <h3>Truy tìm phép thuật</h3>
-                    <p>Thể loại: Trẻ em/Kỳ ảo</p>
-                </div>
-            </div>
-            <div class="movie-item">
-                <img src="https://i.pinimg.com/236x/a1/6c/89/a16c89e3dcd2bbc3d19c1c23ceaf266d.jpg" alt="Phim 6">
-                <div class="movie-info">
-                    <h3>Coco</h3>
-                    <p>Thể loại: Trẻ em/Kỳ ảo</p>
-                </div>
-            </div>
-            <div class="movie-item">
-                <img src="https://i.pinimg.com/236x/24/c0/5e/24c05e7015c2f218bf5dfa79010700f9.jpg" alt="Phim 7">
-                <div class="movie-info">
-                    <h3>Khách sạn huyền bí 2</h3>
-                    <p>Thể loại: Trẻ em/Hài</p>
-                </div>
-            </div>
+            <?php
+            } ?>
 
 
 
@@ -84,8 +47,8 @@
                 slidesToScroll: 1,
                 arrows: true,
                 dots: true,
-                autoplay: false,
-                autoplaySpeed: 3000,
+                autoplay: true,
+                autoplaySpeed: 2000,
                 pauseOnHover: true,
                 responsive: [{
                         breakpoint: 10,

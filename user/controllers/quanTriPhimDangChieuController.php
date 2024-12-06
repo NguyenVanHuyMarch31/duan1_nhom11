@@ -14,8 +14,13 @@ class quanTriPhimDangChieuController
         require_once './views/trangchu.php';
     }
 
-    public function phimdangchieu(){
+    public function phimdangchieu()
+    {
         $listMovies = $this->modelPhim->getMovies();
+        $selectedGenre = isset($_GET['genre']) ? $_GET['genre'] : ''; 
+    $listMovies = $this->modelPhim->getMovie($selectedGenre); 
+
+        
         $listGenres = $this->modelPhim->listGenreMovies();
 
         require_once './views/Phim/phimdangchieu.php';
@@ -42,5 +47,4 @@ class quanTriPhimDangChieuController
             exit();
         }
     }
-    
 }

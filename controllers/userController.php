@@ -2,15 +2,20 @@
 class UserController
 {
     public $model;
+    public $modelPhim;
 
     public function __construct()
     {
+        $this->modelPhim = new modelPhimDangchieus();
+
         $this->model = new userModel();
     }
 
     // Trang chủ
     public function trangchu()
     {
+        $listMovies = $this->modelPhim->getMovies();
+        $listGenres = $this->modelPhim->listGenreMovies();
         require_once './views/trangchu.php';
     }
 
@@ -29,7 +34,6 @@ class UserController
     // Xử lý đăng ký
     public function postRegister()
     {
-        // var_dump($_SERVER['REQUEST_METHOD']); die(); // Dùng để kiểm tra phương thức HTTP (có thể xóa sau khi kiểm tra)
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = $_POST['username'];
@@ -60,20 +64,17 @@ class UserController
     }
     public function postLogin()
     {
-        // var_dump($_POST); // Xem nội dung của $_POST để biết liệu các dữ liệu có được gửi đúng không.
 
 
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        // Kiểm tra tài khoản và mật khẩu
         $user = $this->model->checkLogin($username, $password);
         // var_dump($user);
         // die();
 
 
         if ($user) {
-            // $_SESSION['user'] = $user;
             $_SESSION['user'] = [
                 'id_account' => $user['id_account'],
                 'username' => $user['username'],
@@ -81,7 +82,6 @@ class UserController
             ];
             $_SESSION['login_error'] = null;
 
-            // Redirect đến trang phù hợp dựa trên vai trò
             switch ($user['id_role']) {
                 case 1:
                     header('Location:' . BASE_URL_ADMIN . '?act=/'); // Admin

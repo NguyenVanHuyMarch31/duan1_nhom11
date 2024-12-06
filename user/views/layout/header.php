@@ -307,14 +307,14 @@
         }
 
         .movie-info h3 {
-            font-size: 1.6rem;
+            font-size: 14px;
             color: #333;
             margin: 10px 0;
             font-weight: 600;
         }
 
         .movie-info p {
-            /* font-size: 1rem; */
+            font-size: 10px;
             color: #777;
             margin-bottom: 5px;
         }
@@ -531,6 +531,80 @@
             height: 300px;
             border-radius: 10px;
             margin-right: 20px;
+        }
+             /* Featured Movies Section */
+             .featured-movies {
+            padding: 40px 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 0 auto;
+            /* Canh giữa phần tử */
+        }
+
+        .featured-movies .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: bold;
+        }
+
+
+
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        
+            /* Giới hạn chiều cao tối đa */
+            
+            /* Đảm bảo chiếm toàn bộ chiều cao khi cần */
+        }
+
+
+        .movie-item {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-height: 500px;
+            height: 100%;
+            transition: transform 0.3s ease-in-out;
+            /* Thêm hiệu ứng khi hover */
+        }
+
+        .movie-item:hover {
+            transform: translateY(-5px);
+            /* Di chuyển nhẹ khi hover */
+        }
+
+        .movie-item img {
+            width: 95%;
+            height: 250px;
+            /* object-fit: cover; */
+            border-bottom: 2px solid #f1f1f1;
+            /* Đường viền dưới ảnh */
+        }
+
+        .movie-info {
+            padding: 15px 10px;
+
+        }
+
+        .movie-info h3 {
+            font-size: 16px;
+            color: #333;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        .movie-info p {
+            /* font-size: 1rem; */
+            color: #777;
+            margin-bottom: 5px;
         }
 
         .movie-header h1 {
@@ -790,6 +864,52 @@
 
         .user-menu .nav-link {
             padding: 6px 10px;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-danger:hover {
+            background-color: #a71d2a;
+        }
+
+        .btn-group {
+            display: flex;
+            text-decoration: none;
+            gap: 10px;
+        }
+
+        .pagination-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .pagination-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .page-number {
+            font-size: 16px;
+            color: #333;
+            padding: 0 10px;
+        }
+
+        #pagination-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .user-menu .nav-link i {

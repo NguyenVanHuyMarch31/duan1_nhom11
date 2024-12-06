@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - BeeFilmHub</title>
     <style>
-        /* Importing Google font - Open Sans */
         @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
 
         :root {
@@ -88,8 +87,6 @@
             text-decoration: none;
             font-weight: 500;
             margin-top: 1rem;
-            /* display: block; */
-
         }
     </style>
 </head>
@@ -99,41 +96,24 @@
         <a href="?act=trangchu" class="back-button">↩️Quay lại</a>
         <h2>Đăng nhập</h2>
 
-        <form id="login-form" action="http://localhost/duan1_nhom11/?act=login" method="POST">
-          
-            <!-- Tên đăng nhập -->
+        <form id="login-form" action="http://localhost/duan1_nhom11/?act=login" method="POST" onsubmit="validateSignInForm(event)">
             <div class="input-group">
                 <label for="ten_dang_nhap" class="input-label">Tên đăng nhập</label>
-                <input
-                    class="input"
-                    type="text"
-                    placeholder="Nhập tên đăng nhập"
-                    name="username" 
-                id="ten_dang_nhap"
-                required>
+                <input class="input" type="text" placeholder="Nhập tên đăng nhập" name="username" id="ten_dang_nhap">
+                <div id="username-error" class="error-message"></div>
             </div>
 
-            <!-- Mật khẩu -->
             <div class="input-group">
                 <label for="mat_khau" class="input-label">Mật khẩu</label>
-                <input
-                    class="input"
-                    type="password"
-                    placeholder="Nhập mật khẩu"
-                    name="password" 
-                id="mat_khau"
-                required>
+                <input class="input" type="password" placeholder="Nhập mật khẩu" name="password" id="mat_khau">
+                <div id="password-error" class="error-message"></div>
             </div>
 
-            <!-- Nút Đăng nhập -->
             <button class="btn" type="submit">Đăng nhập</button>
         </form>
 
-
-
         Chưa có tài khoản?
-        <a href="?act=formRegister" class="signup-link">
-            Đăng ký</a>
+        <a href="?act=formRegister" class="signup-link">Đăng ký</a>
     </div>
 
     <script>
@@ -165,7 +145,7 @@
             }
 
             if (valid) {
-                document.getElementById('sign-in-form').submit();
+                document.getElementById('login-form').submit();
             }
         }
     </script>

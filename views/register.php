@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register - BeeFilmHub</title>
     <style>
-        /* Importing Google font - Open Sans */
         @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
 
         :root {
@@ -117,32 +116,30 @@
 
         <h2>Đăng ký</h2>
         <form id="signup-form" action="http://localhost/duan1_nhom11/?act=dangky" method="POST">
-    <div class="input-group">
-        <input class="input" type="text" placeholder="Tên đăng nhập" name="username" id="ten_dang_nhap" required />
-        <div id="username-error" class="error-message"></div>
-    </div>
+            <div class="input-group">
+                <input class="input" type="text" placeholder="Tên đăng nhập" name="username" id="ten_dang_nhap"  />
+                <div id="username-error" class="error-message"></div>
+            </div>
 
-    <div class="input-group">
-        <input class="input" type="email" placeholder="Email" name="email" id="email" required />
-        <div id="email-error" class="error-message"></div>
-    </div>
+            <div class="input-group">
+                <input class="input" type="email" placeholder="Email" name="email" id="email"  />
+                <div id="email-error" class="error-message"></div>
+            </div>
 
-    <div class="input-group">
-        <input class="input" type="password" placeholder="Mật khẩu" name="password" id="mat_khau" required />
-        <div id="password-error" class="error-message"></div>
-    </div>
+            <div class="input-group">
+                <input class="input" type="password" placeholder="Mật khẩu" name="password" id="mat_khau"  />
+                <div id="password-error" class="error-message"></div>
+            </div>
 
-    <button class="btn" type="submit">Đăng ký</button>
-</form>
+            <button class="btn" type="submit">Đăng ký</button>
+        </form>
 
         <?php if (isset($_SESSION['success'])): ?>
             <div class="success-message"><?= $_SESSION['success'] ?></div>
             <?php unset($_SESSION['success']); ?>
         <?php endif; ?>
 
-        Đã có tài khoản?<a class="login-link" href="?act=formLogin"> Đăng nhập</a>
-
-
+        Đã có tài khoản? <a class="login-link" href="?act=formLogin"> Đăng nhập</a>
 
         <script>
             function validateSignUpForm(event) {
@@ -156,24 +153,26 @@
                 document.getElementById('email').classList.remove('error');
                 document.getElementById('mat_khau').classList.remove('error');
 
-                var valid = true;
+                let valid = true;
 
-                var tenDangNhap = document.getElementById('ten_dang_nhap').value;
-                var email = document.getElementById('email').value;
-                var matKhau = document.getElementById('mat_khau').value;
+                const tenDangNhap = document.getElementById('ten_dang_nhap').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const matKhau = document.getElementById('mat_khau').value.trim();
 
-                if (tenDangNhap.trim() === "") {
+                // Validate username
+                if (tenDangNhap === "") {
                     valid = false;
                     document.getElementById('username-error').innerText = "Tên đăng nhập không được để trống.";
                     document.getElementById('ten_dang_nhap').classList.add('error');
                 }
 
-                if (email.trim() === "") {
+                // Validate email
+                if (email === "") {
                     valid = false;
                     document.getElementById('email-error').innerText = "Email không được để trống.";
                     document.getElementById('email').classList.add('error');
                 } else {
-                    var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
                     if (!emailPattern.test(email)) {
                         valid = false;
                         document.getElementById('email-error').innerText = "Vui lòng nhập một địa chỉ email hợp lệ.";
@@ -181,13 +180,12 @@
                     }
                 }
 
-                if (matKhau.trim() === "") {
+                // Validate password
+                if (matKhau === "") {
                     valid = false;
                     document.getElementById('password-error').innerText = "Mật khẩu không được để trống.";
                     document.getElementById('mat_khau').classList.add('error');
-                }
-
-                if (matKhau.length < 6) {
+                } else if (matKhau.length < 6) {
                     valid = false;
                     document.getElementById('password-error').innerText = "Mật khẩu phải có ít nhất 6 ký tự.";
                     document.getElementById('mat_khau').classList.add('error');
@@ -202,6 +200,7 @@
             // Attach the validation function to form submission
             document.getElementById('signup-form').addEventListener('submit', validateSignUpForm);
         </script>
+    </div>
 </body>
 
 </html>

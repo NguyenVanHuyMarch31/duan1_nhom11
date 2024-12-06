@@ -114,62 +114,62 @@ class modelDatVes
         }
     }
    // Lấy thông tin chi tiết đơn hàng
-   public function getOrderDetails($orderId)
-{
-    // Kiểm tra đầu vào
-    if (!is_numeric($orderId)) {
-        return false;
-    }
+//    public function getOrderDetails($orderId)
+// {
+//     // Kiểm tra đầu vào
+//     if (!is_numeric($orderId)) {
+//         return false;
+//     }
 
-    $query = "SELECT 
-                  o.id_order, 
-                  o.account_id, 
-                  o.order_date, 
-                  o.status, 
-                  od.ticket_id, 
-                  od.quantity, 
-                  od.total_price,
-                  t.movie_id, 
-                  t.showtime_id, 
-                  t.seat_id, 
-                  t.price AS ticket_price,
-                  m.movie_name, 
-                  s.showtime_id, 
-                  r.room_name AS cinema_room, 
-                  seat.seat_row, 
-                  seat.seat_column, 
-                  a.full_name, 
-                  a.phone, 
-                  a.email 
-              FROM order_details od
-              JOIN `order` o ON od.order_id = o.id_order
-              JOIN tickets t ON od.ticket_id = t.id_ticket
-              JOIN movie m ON t.movie_id = m.movie_id
-              JOIN showtimes s ON t.showtime_id = s.showtime_id
-              JOIN cinema_room r ON s.id_cinema_room = r.id_cinema_room
-              JOIN account a ON o.account_id = a.id_account
-              JOIN seat seat ON t.seat_id = seat.id_seat
-              WHERE o.id_order = :orderId";
+//     $query = "SELECT 
+//                   o.id_order, 
+//                   o.account_id, 
+//                   o.order_date, 
+//                   o.status, 
+//                   od.ticket_id, 
+//                   od.quantity, 
+//                   od.total_price,
+//                   t.movie_id, 
+//                   t.showtime_id, 
+//                   t.seat_id, 
+//                   t.price AS ticket_price,
+//                   m.movie_name, 
+//                   s.showtime_id, 
+//                   r.room_name AS cinema_room, 
+//                   seat.seat_row, 
+//                   seat.seat_column, 
+//                   a.full_name, 
+//                   a.phone, 
+//                   a.email 
+//               FROM order_details od
+//               JOIN `order` o ON od.order_id = o.id_order
+//               JOIN tickets t ON od.ticket_id = t.id_ticket
+//               JOIN movie m ON t.movie_id = m.movie_id
+//               JOIN showtimes s ON t.showtime_id = s.showtime_id
+//               JOIN cinema_room r ON s.id_cinema_room = r.id_cinema_room
+//               JOIN account a ON o.account_id = a.id_account
+//               JOIN seat seat ON t.seat_id = seat.id_seat
+//               WHERE o.id_order = :orderId";
 
-    // Database connection
-    $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(':orderId', $orderId, PDO::PARAM_INT);
-    $stmt->execute();
+//     // Database connection
+//     $stmt = $this->conn->prepare($query);
+//     $stmt->bindParam(':orderId', $orderId, PDO::PARAM_INT);
+//     $stmt->execute();
 
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+//     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Log lỗi nếu không có kết quả
-    if (!$result) {
-        error_log("Order not found for ID: $orderId");
-    }
+//     // Log lỗi nếu không có kết quả
+//     if (!$result) {
+//         error_log("Order not found for ID: $orderId");
+//     }
 
-    return $result;
-}
+//     return $result;
+// }
 public function layChiTietVeById($id_ticket)
 {
     $query = "
-        SELECT t.id_ticket, t.price AS ticket_price, 
-               s.start_time, s.end_time, 
+        SELECT t.id_ticket, t.price AS ticket_prices, 
+               s.start_time, s.end_time,
                m.movie_name, m.duration, m.description AS movie_description, 
                GROUP_CONCAT(st.seat_name SEPARATOR ', ') AS seat_names,
                cr.room_name AS cinema_room_name  
@@ -187,6 +187,30 @@ public function layChiTietVeById($id_ticket)
     $stmt->execute();
 
     return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+public function insertOrder($id_account, $orderDate, $status)
+{
+    $sql = "INSERT INTO `order` (account_id, order_date, status) VALUES (:account_id, :order_date, :status)";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute([
+        ':account_id' => $id_account, // Chỉnh sửa cho đúng tên cột
+        ':order_date' => $orderDate,
+        ':status' => $status
+    ]);
+    return $this->conn->lastInsertId(); // Lấy ID của order vừa được thêm
+}
+
+public function insertOrderDetails($orderId, $ticketId, $quantity, $totalPrice)
+{
+    $sql = "INSERT INTO order_details (order_id, ticket_id, quantity, total_price) 
+            VALUES (:order_id, :ticket_id, :quantity, :total_price)";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute([
+        ':order_id' => $orderId,
+        ':ticket_id' => $ticketId,
+        ':quantity' => $quantity,
+        ':total_price' => $totalPrice
+    ]);
 }
 
 

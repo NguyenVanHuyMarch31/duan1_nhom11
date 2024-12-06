@@ -11,6 +11,8 @@ class quanTriPhimDangChieuController
     // Trang chủ
     public function trangchu()
     {
+        $listMovies = $this->modelPhim->getMovies();
+        $listGenres = $this->modelPhim->listGenreMovies();
         require_once './views/trangchu.php';
     }
 

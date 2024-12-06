@@ -2,15 +2,21 @@
 class UserController
 {
     public $model;
+    public $modelPhim;
 
     public function __construct()
     {
+        $this->modelPhim = new modelPhimDangchieus();
+        
         $this->model = new userModel();
     }
 
     // Trang chủ
     public function trangchu()
     {
+        $listMovies = $this->modelPhim->getMovies();
+        $listGenres = $this->modelPhim->listGenreMovies();
+
         require_once './views/trangchu.php';
     }
 

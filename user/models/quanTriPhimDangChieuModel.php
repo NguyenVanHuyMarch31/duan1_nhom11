@@ -52,5 +52,28 @@ class modelPhimDangchieus
         $stmt->execute([':movie_id' => $movie_id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    public function getMovie($genre = '')
+{
+    $sql = "SELECT m.*, GROUP_CONCAT(g.genre_name SEPARATOR ', ') as genres
+            FROM movie m
+            LEFT JOIN movie_genre mg ON m.movie_id = mg.movie_id
+            LEFT JOIN genre g ON mg.genre_id = g.genre_id";
+
+    if ($genre) {
+        $sql .= " WHERE g.genre_id = :genre_id"; // Thêm điều kiện lọc theo thể loại
+    }
+
+    $sql .= " GROUP BY m.movie_id";
+    $stmt = $this->conn->prepare($sql);
+
+    if ($genre) {
+        $stmt->execute([':genre_id' => $genre]); // Truyền genre_id vào câu truy vấn
+    } else {
+        $stmt->execute(); // Nếu không có thể loại, lấy tất cả
+    }
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 
 }

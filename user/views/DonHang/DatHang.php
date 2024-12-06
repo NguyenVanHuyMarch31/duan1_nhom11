@@ -8,11 +8,11 @@
         <div class="info-film" style="display: flex; align-items: flex-start; gap: 20px;">
             <div style="flex: 7; text-align: left;">
                 <h2>Thông Tin Phim</h2>
-                <p><strong>Phim:</strong> <?= htmlspecialchars($movie['movie_name']) ?></p>
-                <p><strong>Mô tả:</strong> <?= htmlspecialchars($movie['description']) ?></p>
+                <p><strong>Phim:</strong> <?= ($movie['movie_name']) ?></p>
+                <p><strong>Mô tả:</strong> <?= ($movie['description']) ?></p>
             </div>
             <div style="flex: 3; text-align: center;">
-                <img src="<?= htmlspecialchars(BASE_URL_USER . $movie['poster']) ?>" alt="Poster Phim" style="max-width: 100%; height: 200px; border-radius: 10px;">
+                <img src="<?= (BASE_URL . $movie['poster']) ?>" alt="Poster Phim" style="max-width: 100%; height: 200px; border-radius: 10px;">
             </div>
         </div>
 
@@ -23,7 +23,7 @@
                 <option value="">Chọn Suất Chiếu</option>
                 <?php foreach ($showtimes as $showtime): ?>
                     <option value="<?= $showtime['showtime_id'] ?>" <?= isset($selected_showtime_id) && $selected_showtime_id == $showtime['showtime_id'] ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($showtime['start_time']) ?>
+                        <?= ($showtime['start_time']) ?>
                     </option>
                 <?php endforeach; ?>
             </select>
@@ -35,7 +35,7 @@
                     <option value="">Chọn Phòng Chiếu</option>
                     <?php foreach ($cinema_rooms as $room): ?>
                         <option value="<?= $room['id_cinema_room'] ?>" <?= isset($selected_cinema_room_id) && $selected_cinema_room_id == $room['id_cinema_room'] ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($room['room_name']) ?>
+                            <?= ($room['room_name']) ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
@@ -46,9 +46,9 @@
 
                         <select name="seat_id[]" id="cinema-room" class="form-control" multiple>
                             <?php foreach ($seats as $seat): ?>
-                                <option value="<?= htmlspecialchars($seat['id_seat']) ?>"
+                                <option value="<?= ($seat['id_seat']) ?>"
                                     <?= $seat['status'] == 'Đã đặt' ? 'disabled' : ''; ?>>
-                                    <?= htmlspecialchars($seat['seat_name']) ?>
+                                    <?= ($seat['seat_name']) ?>
                                     <?php if ($seat['status'] == 'Đã đặt') echo '(Đã đặt)'; ?>
                                 </option>
                             <?php endforeach; ?>
@@ -74,12 +74,12 @@
                             <?= ($seat['seat_type_id'] == 3) ? 'red' : '' ?>
                             <?= ($seat['status'] == 'booked') ? 'booked' : '' ?>"
                             data-seat-id="<?= $seat['id_seat'] ?>"
-                            data-seat-name="<?= htmlspecialchars($seat['seat_name']) ?>"
-                            data-row="<?= htmlspecialchars($seat['seat_row']) ?>"
-                            data-column="<?= htmlspecialchars($seat['seat_column']) ?>">
+                            data-seat-name="<?= ($seat['seat_name']) ?>"
+                            data-row="<?= ($seat['seat_row']) ?>"
+                            data-column="<?= ($seat['seat_column']) ?>">
                             <input type="checkbox" name="selected_seats[]" value="<?= $seat['id_seat'] ?>" class="seat-checkbox"
                                 <?= ($seat['status'] == 'unavailable' || $seat['status'] == 'booked') ? 'disabled' : '' ?>>
-                            <label><?= htmlspecialchars($seat['seat_name']) ?></label>
+                            <label><?= ($seat['seat_name']) ?></label>
                             <?php if ($seat['status'] == 'Đã đặt'): ?>❌
                             <?php elseif ($seat['status'] == 'Ghế trống'): ?>🪑
                         <?php else: ?>

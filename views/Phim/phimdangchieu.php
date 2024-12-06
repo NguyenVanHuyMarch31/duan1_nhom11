@@ -312,6 +312,7 @@
             color: #000;
             cursor: pointer;
         }
+
         .btn-primary {
             background-color: #007bff;
             border: none;
@@ -337,8 +338,38 @@
         .btn-danger:hover {
             background-color: #a71d2a;
         }
+
         .btn-group {
             display: flex;
+            text-decoration: none;
+            gap: 10px;
+        }
+
+        .pagination-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .pagination-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .page-number {
+            font-size: 16px;
+            color: #333;
+            padding: 0 10px;
+        }
+
+        #pagination-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             gap: 10px;
         }
     </style>
@@ -368,30 +399,30 @@
 
     <main>
         <div class="main-container">
-            <!-- Filters Section (Left Side) -->
             <div class="filters">
                 <div class="movie-search">
-                    <input type="text" placeholder="Tìm kiếm phim..." id="searchInput">
+                    <input type="text" placeholder="Tìm kiếm phim..." id="searchInput" onkeyup="searchMovies()">
                 </div>
 
                 <div class="filters-genres">
-                    <?php
-                    foreach ($listGenres as $genre) { ?>
-                        <input type="checkbox" id="actionGenre"> <label for="actionGenre"><?= $genre['genre_name'] ?></label><br>
-
-                    <?php }
-                    ?>
+                    <div class="filters-genres">
+                        <?php
+                        foreach ($listGenres as $genre) { ?>
+                            <input type="checkbox" class="genre-checkbox" data-genre="<?= $genre['genre_id'] ?>" onchange="filterMovies()">
+                            <label for="genre-<?= $genre['genre_id'] ?>"><?= $genre['genre_name'] ?></label><br>
+                        <?php }
+                        ?>
+                    </div>
                 </div>
             </div>
 
-            <!-- Movies Section (Right Side) -->
             <div class="movie-section">
-                <div class="movie-list">
+                <div class="movie-list" id="movie-list">
                     <?php
-                    foreach ($listMovies as $movie) {
+                    foreach ($listMovies as $index => $movie) {
                     ?>
-                        <div class="movie-card" onclick="openModal('<?= $movie['trailer'] ?>')">
-                            <img src="<?= BASE_URL . $movie['poster'] ?>" alt="Poster"
+                        <div class="movie-card" data-index="<?= $index ?>">
+                            <img src="<?= BASE_URL . $movie['poster'] ?>" alt="Poster" onclick="openModal('<?= $movie['trailer'] ?>')"
                                 onerror="this.onerror=null; this.src='https://i.pinimg.com/236x/02/02/3e/02023ee1ee6d1a463eff69caf78e6322.jpg'">
                             <h3><?= $movie['movie_name'] ?></h3>
                             <p><?= $movie['genres'] ?> | <?= $movie['duration'] ?> phút</p>
@@ -403,20 +434,23 @@
                                     Đặt vé phim
                                 </a>
                             </div>
-
                         </div>
-
                     <?php
                     }
                     ?>
-
-                    <!-- Additional movies go here -->
                 </div>
+
+                <div id="pagination-controls">
+                    <button onclick="changePage('prev')" class="pagination-btn" id="prev-btn">Trước</button>
+                    <span id="page-number" class="page-number"> 1</span>
+                    <button onclick="changePage('next')" class="pagination-btn" id="next-btn">Tiếp</button>
+                </div>
+
             </div>
+
         </div>
     </main>
 
-    <!-- Modal for Video -->
     <div class="modal" id="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -438,17 +472,126 @@
         </div>
     </footer>
     <script>
-        // Open modal with trailer video
+        const moviesPerPage = 6;
+        let currentPage = 1;
+        const allMovies = document.querySelectorAll('.movie-card');
+        const totalMovies = allMovies.length;
+        const totalPages = Math.ceil(totalMovies / moviesPerPage);
+
+        function displayMovies() {
+            allMovies.forEach(movie => movie.style.display = 'none');
+
+            const start = (currentPage - 1) * moviesPerPage;
+            const end = start + moviesPerPage;
+            for (let i = start; i < end && i < totalMovies; i++) {
+                allMovies[i].style.display = 'block';
+            }
+
+            document.getElementById('page-number').textContent = ` ${currentPage}`;
+        }
+
+        function changePage(direction) {
+            if (direction === 'next' && currentPage < totalPages) {
+                currentPage++;
+            } else if (direction === 'prev' && currentPage > 1) {
+                currentPage--;
+            }
+            displayMovies();
+        }
+
+        displayMovies();
+
         function openModal(trailerLink) {
             document.getElementById('trailerIframe').src = trailerLink;
             document.getElementById('modal').style.display = 'flex';
         }
 
-        // Close modal
         function closeModal() {
             document.getElementById('modal').style.display = 'none';
             document.getElementById('trailerIframe').src = '';
         }
+
+        function searchMovies() {
+            var input = document.getElementById("searchInput").value.toLowerCase();
+            var movieCards = document.querySelectorAll(".movie-card");
+            movieCards.forEach(function(card) {
+                var movieName = card.querySelector("h3").textContent.toLowerCase();
+                if (movieName.indexOf(input) > -1) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        document.querySelectorAll('.genre-checkbox').forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                var selectedGenres = [];
+                document.querySelectorAll('.genre-checkbox:checked').forEach(function(checkedCheckbox) {
+                    selectedGenres.push(checkedCheckbox.getAttribute('data-genre'));
+                });
+
+                var movieCards = document.querySelectorAll(".movie-card");
+                movieCards.forEach(function(card) {
+                    var movieGenres = card.getAttribute('data-genre').split(',');
+                    var isVisible = selectedGenres.length === 0 || selectedGenres.some(genre => movieGenres.includes(genre));
+                    card.style.display = isVisible ? "" : "none";
+                });
+            });
+        });
+        const genreCheckboxes = document.querySelectorAll('.genre-checkbox');
+        const movieCards = document.querySelectorAll('.movie-card');
+
+        function filterMovies() {
+            const selectedGenres = [];
+
+            genreCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedGenres.push(parseInt(checkbox.getAttribute('data-genre')));
+                }
+            });
+
+            movieCards.forEach(card => {
+                const movieGenres = card.getAttribute('data-genres').split(',');
+                const hasMatchingGenre = selectedGenres.some(genre => movieGenres.includes(genre.toString()));
+
+                if (selectedGenres.length === 0 || hasMatchingGenre) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        genreCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', filterMovies);
+        });
+
+        function filterMovies() {
+            const selectedGenres = [];
+
+            // Lấy danh sách các thể loại đã chọn
+            genreCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedGenres.push(checkbox.getAttribute('data-genre'));
+                }
+            });
+
+            // Lọc các phim dựa trên thể loại đã chọn
+            movieCards.forEach(card => {
+                const movieGenres = card.getAttribute('data-genres').split(',');
+                const hasMatchingGenre = selectedGenres.some(genre => movieGenres.includes(genre));
+
+                // Hiển thị hoặc ẩn phim tùy thuộc vào thể loại có chọn hay không
+                if (selectedGenres.length === 0 || hasMatchingGenre) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        filterMovies();
     </script>
 </body>
 

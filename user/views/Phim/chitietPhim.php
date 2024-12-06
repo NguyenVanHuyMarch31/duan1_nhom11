@@ -8,7 +8,7 @@
     <main style="margin: 100px;">
         <div class="container">
             <div class="movie-header">
-                <img src="<?= BASE_URL_USER . $movie['poster'] ?>" alt="Poster"
+                <img src="<?= BASE_URL . $movie['poster'] ?>" alt="Poster"
                     onerror="this.onerror=null; this.src='https://i.pinimg.com/236x/02/02/3e/02023ee1ee6d1a463eff69caf78e6322.jpg'">
                 <div>
                     <h1><?= $movie['movie_name'] ?? 'Thông tin phim' ?></h1>

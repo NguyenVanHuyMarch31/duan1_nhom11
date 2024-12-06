@@ -197,6 +197,8 @@
 
         <form action="<?= BASE_URL_USER . '?act=camOn' ?>" method="POST">
             <!-- Header -->
+            <input type="hidden" name="ticket_id" value="<?= $ticketDetails['id_ticket'] ?>">
+            <input type="hidden" name="total_price" value="<?= $ticketDetails['ticket_prices'] ?>">
             <div class="header">
                 <h1 class="display-4">Thông Tin Đặt Vé</h1>
                 <p class="lead">Chúng tôi đã ghi nhận thông tin vé của bạn. Cảm ơn bạn đã đặt vé!</p>
@@ -207,9 +209,11 @@
                     <!-- Thông tin người đặt vé -->
                     <div class="ticket-info">
                         <h3 class="h5">Thông tin người đặt vé:</h3>
+                        <input type="hidden" name="">
                         <p><strong>Họ tên:</strong> <?= $account['full_name'] ?></p>
                         <p><strong>Số điện thoại:</strong> <?= $account['phone'] ?></p>
                         <p><strong>Email:</strong> <?= $account['email'] ?></p>
+                        <!-- <p><strong>Ngày đặt vé :</strong><?= $ticketDetails['order_date'] ?></p> -->
                     </div>
                 </div>
 
@@ -219,7 +223,8 @@
                         <h3 class="h5">Thông tin vé bạn đã chọn:</h3>
                         <p><strong>Phim:</strong> <?= $ticketDetails['movie_name'] ?></p>
                         <p><strong>Suất chiếu:</strong> <?= date('H:i - d/m/Y', strtotime($ticketDetails['start_time'])) ?></p>
-                        <p><strong>Phòng chiếu:</strong> <?= $ticketDetails['cinema_room_name'] ?>- <strong>Ghế đã chọn:</strong> <?= $ticketDetails['seat_names'] ?></p>
+                        <p><strong>Phòng chiếu:</strong> <?= $ticketDetails['cinema_room_name'] ?></p>
+                        <p><strong>Ghế đã chọn:</strong> <?= $ticketDetails['seat_names'] ?></p>
                     </div>
                 </div>
 
@@ -227,7 +232,7 @@
                 <div class="payment-info text-center mb-4">
                     <h3 class="h5">Thông tin thanh toán:</h3>
                     <p><strong>Hình thức thanh toán:</strong> Thanh toán online</p>
-                    <p class="total">Tổng giá vé: <?= number_format($ticketDetails['ticket_price'], 0, ',', '.') ?> VND</p>
+                    <p class="total">Tổng giá vé: <?= number_format($ticketDetails['ticket_prices'], 0, ',', '.') ?> VND</p>
                 </div>
 
                 <!-- Phương thức thanh toán -->
