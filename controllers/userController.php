@@ -64,24 +64,28 @@ class UserController
     }
     public function postLogin()
     {
-
-
         $username = $_POST['username'];
         $password = $_POST['password'];
-
+    
         $user = $this->model->checkLogin($username, $password);
-        // var_dump($user);
-        // die();
-
-
+    
         if ($user) {
+            // Kiểm tra trạng thái tài khoản
+            if ($user['status'] == '0') {
+                $_SESSION['login_error'] = "Tài khoản của bạn đã bị vô hiệu hóa!";
+                header('Location: ' . BASE_URL . '?act=formLogin');
+                exit;
+            }
+    
+            // Nếu tài khoản hợp lệ và chưa bị vô hiệu hóa
             $_SESSION['user'] = [
                 'id_account' => $user['id_account'],
                 'username' => $user['username'],
                 'email' => $user['email'],
             ];
             $_SESSION['login_error'] = null;
-
+    
+            // Điều hướng theo vai trò
             switch ($user['id_role']) {
                 case 1:
                     header('Location:' . BASE_URL_ADMIN . '?act=/'); // Admin
@@ -103,6 +107,7 @@ class UserController
             exit;
         }
     }
+    
 
 
     // Đăng xuất

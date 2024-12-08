@@ -13,7 +13,6 @@ class modelPays
         $this->conn = null;  // Đóng kết nối sau khi sử dụng
     }
     public function getTicketDetails($ticketId) {
-        // Query to fetch ticket details based on ticketId
         $sql = "SELECT t.id_ticket, t.movie_id, t.showtime_id, t.seat_id, t.price, 
                        m.movie_name, m.duration, m.description, s.seat_name 
                 FROM tickets t 
@@ -29,7 +28,6 @@ class modelPays
     }
 
     public function getOrderDetails($orderId) {
-        // Query to fetch order details, including tickets and customer info
         $sql = "SELECT o.id_order, o.account_id, o.order_date, o.status, 
                        a.full_name, a.phone, a.email 
                 FROM `order` o

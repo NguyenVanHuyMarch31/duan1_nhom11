@@ -95,7 +95,17 @@
     <div class="container">
         <a href="?act=trangchu" class="back-button">↩️Quay lại</a>
         <h2>Đăng nhập</h2>
-
+ <!-- Hiển thị thông báo lỗi dưới dạng bảng nếu có -->
+ <?php
+        if (isset($_SESSION['login_error'])) {
+            echo '<table style="width: 100%; margin-bottom: 20px; border: 1px solid red; background-color: #f8d7da; color: red; border-radius: 5px; text-align: center;">
+                    <tr>
+                        <td><strong>' . $_SESSION['login_error'] . '</strong></td>
+                    </tr>
+                  </table>';
+            unset($_SESSION['login_error']); // Xóa thông báo sau khi hiển thị
+        }
+        ?>
         <form id="login-form" action="http://localhost/duan1_nhom11/?act=login" method="POST" onsubmit="validateSignInForm(event)">
             <div class="input-group">
                 <label for="ten_dang_nhap" class="input-label">Tên đăng nhập</label>

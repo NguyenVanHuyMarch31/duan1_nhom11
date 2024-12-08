@@ -5,18 +5,16 @@ class modelDatVes
 
     public function __construct()
     {
-        $this->conn = connectDB(); // Kết nối cơ sở dữ liệu
+        $this->conn = connectDB();
     }
 
     public function __destruct()
     {
-        $this->conn = null; // Đóng kết nối sau khi sử dụng
+        $this->conn = null; 
     }
 
-    // Thêm vào trong modelDatVes
     public function getSeats()
     {
-        // Giả sử bạn muốn lấy tất cả ghế mà không cần điều kiện phòng chiếu
         $query = "SELECT * FROM seat";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -30,7 +28,6 @@ class modelDatVes
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Lấy danh sách suất chiếu theo ID phim
     public function getShowtimesByMovieId($movie_id)
     {
         $query = "SELECT * FROM showtimes WHERE movie_id = :movie_id";
@@ -40,7 +37,6 @@ class modelDatVes
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Lấy danh sách phòng chiếu
     public function getCinemaRooms()
     {
         $query = "SELECT * FROM cinema_room";
@@ -54,8 +50,7 @@ class modelDatVes
 
     public function insertVe($movie_id, $showtime_id, $seat_id)
 {
-    // Giả sử bạn có giá vé và mã QR từ form hoặc tính toán
-    $price = 120000; // Ví dụ giá vé là 100,000 VND
+    $price = 120000; 
 
     $sql = "INSERT INTO tickets (movie_id, showtime_id, seat_id, price, qr) 
             VALUES (:movie_id, :showtime_id, :seat_id, :price, :qr)";
@@ -68,9 +63,8 @@ class modelDatVes
     $stmt->bindParam(':qr', $qr);
 
     if ($stmt->execute()) {
-        // Trả về mảng thông tin vé, bao gồm id_ticket
         $ticket = [
-            'id_ticket' => $this->conn->lastInsertId(), // Lấy id_ticket mới nhất
+            'id_ticket' => $this->conn->lastInsertId(), 
             'movie_id' => $movie_id,
             'showtime_id' => $showtime_id,
             'seat_id' => $seat_id,
@@ -91,6 +85,16 @@ class modelDatVes
         $stmt->execute();
         return $stmt->fetchColumn() > 0;
     }
+    public function getSeatNameById($seat_id)
+{
+    $query = "SELECT seat_name FROM seats WHERE seat_id = :seat_id";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(':seat_id', $seat_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result ? $result['seat_name'] : null;
+}
+
 
     public function updateSeatStatus($seat_id, $status)
     {

@@ -27,7 +27,7 @@
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="#"><i class="fa fa-user"></i>Thông tin tài khoản</a>
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i>Cài đặt</a>
-                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i>Đăng xuất</a>
+                            <a class="nav-link" href="http://localhost/duan1_nhom11"><i class="fa fa-power-off"></i>Đăng xuất</a>
                         </div>
                     </div>
                 </div>

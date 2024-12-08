@@ -198,7 +198,7 @@
                 </div>
 
                 <div class="profile-avatar">
-                <img src="<?= BASE_URL_USER . $account['thumbnail'] ?>" alt="<?= $account['username'] ?? 'Ảnh đại diện' ?>" onerror="this.onerror=null; this.src='https://i.pinimg.com/474x/8b/ec/ad/8becad61ee85c3c02b460bddf5ba7905.jpg'">
+                <img src="<?= BASE_URL . $account['thumbnail'] ?>" alt="<?= $account['username'] ?? 'Ảnh đại diện' ?>" onerror="this.onerror=null; this.src='https://i.pinimg.com/474x/8b/ec/ad/8becad61ee85c3c02b460bddf5ba7905.jpg'">
 
                 </div>
             </div>

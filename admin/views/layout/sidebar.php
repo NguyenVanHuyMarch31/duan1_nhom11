@@ -32,9 +32,9 @@
                         <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-laptop"></i>Quản lý suất chiếu
                         </a>
                     </li> -->
-                    <li class="menu-item dropdown">
+                    <!-- <li class="menu-item dropdown">
                         <a href="<?php echo BASE_URL_ADMIN . '?act=/' ?>"><i class="menu-icon fa fa-bar-chart-o"></i>Thống kê </a>
-                    </li>
+                    </li> -->
                     <li class="menu-item dropdown">
                         <a href="<?php echo BASE_URL_ADMIN . '?act=quanTriDatHang' ?>"><i class="menu-icon fa fa-shopping-cart"></i>Đặt hàng</a>
                     </li>

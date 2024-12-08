@@ -3,10 +3,12 @@ class UserController
 {
     public $model;
     public $modelPhim;
+    public $modelDatVe;
 
     public function __construct()
     {
         $this->modelPhim = new modelPhimDangchieus();
+        $this->modelDatVe = new modelDatVes();
         
         $this->model = new userModel();
     }
@@ -163,6 +165,20 @@ class UserController
         require_once './views/TaiKhoan/doiMatKhau.php';
     }
     public function lichSuDatVe(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Lấy dữ liệu từ form
+            $id_account = $_SESSION['user']['id_account'];
+            $orderDate = date('Y-m-d H:i:s'); // Lấy thời gian hiện tại (ngày và giờ)
+            $status = 'Đã thanh toán';
+            $ticketId = $_POST['ticket_id']; // ID vé (giả định có input hidden trong form)
+            $quantity = 1; // Giả định 1 vé
+            $totalPrice = $_POST['total_price']; // Tổng giá vé từ form
+            
+
+            $orderId = $this->modelDatVe->insertOrder($id_account, $orderDate, $status);
+
+            $this->modelDatVe->insertOrderDetails($orderId, $ticketId, $quantity, $totalPrice);
+        }
         require_once './views/TaiKhoan/lichSuDatVe.php';
     }
 }

@@ -213,7 +213,7 @@
                         <p><strong>Họ tên:</strong> <?= $account['full_name'] ?></p>
                         <p><strong>Số điện thoại:</strong> <?= $account['phone'] ?></p>
                         <p><strong>Email:</strong> <?= $account['email'] ?></p>
-                        <!-- <p><strong>Ngày đặt vé :</strong><?= $ticketDetails['order_date'] ?></p> -->
+                        <!-- <p><strong>Ngày đặt vé :</strong><?= $orderId['order_date'] ?></p> -->
                     </div>
                 </div>
 

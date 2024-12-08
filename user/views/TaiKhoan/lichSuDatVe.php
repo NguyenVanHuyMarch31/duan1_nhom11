@@ -226,14 +226,14 @@
             {
                 movie: "Avatar 2",
                 cinema: "CGV Vincom Hà Nội",
-                time: "19:00 - Ngày 10/12/2024",
+                time: "19:00 - Ngày 10/11/2024",
                 seats: "A1, A2",
                 payment: "MB Bank - 0986690271"
             },
             {
                 movie: "Spiderman: No Way Home",
                 cinema: "Lotte Cinema Hà Đông",
-                time: "15:30 - Ngày 05/12/2024",
+                time: "15:30 - Ngày 05/11/2024",
                 seats: "B3, B4",
                 payment: "MB Bank - 0986690271"
             },

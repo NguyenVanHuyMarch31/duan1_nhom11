@@ -47,9 +47,12 @@
                         <select name="seat_id[]" id="cinema-room" class="form-control" multiple>
                             <?php foreach ($seats as $seat): ?>
                                 <option value="<?= ($seat['id_seat']) ?>"
-                                    <?= $seat['status'] == 'Đã đặt' ? 'disabled' : ''; ?>>
+                                    <?= $seat['status'] == 'Đã đặt' ? 'disabled' : ''; ?>
+                                    <?= $seat['status'] == 'Ghế đã chọn' ? 'disabled' : ''; ?>>
                                     <?= ($seat['seat_name']) ?>
-                                    <?php if ($seat['status'] == 'Đã đặt') echo '(Đã đặt)'; ?>
+                                    <?php if ($seat['status'] == 'Đã đặt') echo '(Đã đặt)';
+                                    elseif ($seat['status'] == 'Ghế đã chọn') echo '(Ghế đã chọn)';
+                                    ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
